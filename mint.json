@@ -1,81 +1,70 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Endtest Docs",
+  "theme":"venus",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/endtest_logo_full_white.png",
+    "light": "/logo/et-logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/endtest_logo_1.png",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#11a5e9",
+    "light": "#11a5e9",
+    "dark": "#11a5e9",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#11a5e9",
+      "to": "#afd5aa"
     }
   },
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:contact@endtest.io"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.endtest.io"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
+
+
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Web Tests",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "web-tests/how-to-create-web-tests",
+        "web-tests/finding-elements-in-web-applications",
+        "web-tests/how-to-execute-web-tests",
+        "web-tests/assertions-for-web-tests",
+        "web-tests/if-statements-for-web-tests",
+        "web-tests/web-applications-with-restricted-access"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Mobile Tests",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Advanced",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "Integrations",
       "pages": [
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
@@ -84,8 +73,7 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "x": "https://x.com/endtest_io",
+    "linkedin": "https://linkedin.com/company/endtest"
   }
 }

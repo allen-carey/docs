@@ -1,0 +1,75 @@
+---
+title: 'How to Create Web Tests'
+description: 'Learn how to record or manually create web tests'
+icon: 'plus'
+---
+
+## Introduction
+
+There are 2 ways to create Web Tests:
+1. With the [Endtest Chrome Extension](https://chrome.google.com/webstore/detail/endtest/jbdgfkeimppmnfemmgfafiomihlibdfa).
+2. Manually adding test suites, test cases and steps.
+
+## 1. With the Endtest Chrome Extension.
+
+The extension allows you to record Web Tests directly in your Chrome browser.
+
+Those tests are saved directly into your Endtest account.
+
+You can download and install the [Endtest Chrome Extension](https://chrome.google.com/webstore/detail/endtest/jbdgfkeimppmnfemmgfafiomihlibdfa) from the Chrome Web Store.
+
+It can identify elements by ID, Name, CSS Selector and XPath.
+
+The extension can also handle complex scenarios, with full support for iframes and multiple tabs.
+
+You can also add steps for assertions and screenshots.
+
+The recording can be paused and resumed.
+
+Settings are also available and can be updated even while recording.
+
+After a test has been saved, you can manually make changes to that test.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_chrome_extension.webm"
+></video>
+
+## 2. Manually adding test suites, test cases and steps.
+
+### Add a test suite
+
+1. Go to the [Web Tests](https://app.endtest.io/tests) section.
+2. Click on the `Add Test Suite` button.
+3. Enter the name for the test suite.
+4. Click on the `Save Test Suite` button.
+
+### Add a test case
+
+Test cases can be added only after you have created the test suite.
+
+1. Click on the `Add Test Case` button.
+2. Enter the name for the test case.
+
+### Add steps inside the test case
+
+A test case is made up of steps.
+
+To add a new step, just click on the `Add Step` button.
+
+Every step is defined by its Action.
+
+Some actions are tied to the entire page (actions such as `Go to URL`, `Refresh Page`, `Take Screenshot`, etc).
+
+While other actions must be tied to a specific element (actions such as `Click`, `Write Text`, etc).
+
+To tie an Action to a specific Element, you must use a Locator.
+
+A Locator is basically an attribute which identifies the element (Id, Name, XPath, Link Text, etc).
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_create_web_test_without_recorder.webm"
+></video>

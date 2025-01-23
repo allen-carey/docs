@@ -1,0 +1,133 @@
+---
+title: 'Web Applications with Restricted Access'
+description: 'Learn how to manage tests for web applications with restricted access'
+icon: 'road-barrier'
+---
+
+## Introduction
+
+How can you test a web application which is only accessible from your workplace or behind a firewall?
+
+There are 4 solutions for this situation.
+
+## 1. Whitelisting
+
+The easiest way would be to whitelist our list of Secure Gateway IPs:
+
+| Secure Gateway IP Addresses |
+|-----------------------------|
+| 34.211.40.72                |
+| 35.166.159.89               |
+| 207.254.40.71               |
+| 207.254.60.102              |
+| 52.89.18.176                |
+| 52.26.12.35                 |
+| 54.187.169.42               |
+| 52.43.87.222                |
+| 34.214.85.4                 |
+| 54.184.162.15               |
+| 44.237.178.201              |
+| 44.238.105.245              |
+| 44.228.22.115               |
+| 35.81.185.74                |
+| 207.254.52.64               |
+| 44.241.213.227              |
+| 52.26.206.66                |
+| 52.13.40.64                 |
+| 44.238.190.158              |
+| 207.254.60.6                |
+| 207.254.41.137              |
+| 207.254.60.76               |
+| 34.213.62.124               |
+| 54.191.53.140               |
+| 18.237.140.182              |
+| 52.11.28.247                |
+| 44.240.94.219               |
+
+If you want to use Real IP Geolocation in your tests, you'll have to add these entries to the whitelist as well:
+
+| Geolocation            | IP Address       |
+|------------------------|------------------|
+| San Francisco, US      | 52.53.118.130    |
+| Seattle, US            | 20.64.225.137    |
+| Montreal, Canada       | 3.97.155.50      |
+| London, UK             | 3.9.107.187      |
+| Frankfurt, Germany     | 52.28.171.236    |
+| Eemshaven, Netherlands | 34.90.84.125     |
+| Dubai, UAE             | 3.28.26.211      |
+| Tel Aviv, Israel       | 51.16.199.215    |
+| Tokyo, Japan           | 18.179.93.49     |
+| Seoul, South Korea     | 13.209.174.252   |
+| Singapore              | 54.151.171.44    |
+| Sydney, Australia      | 54.206.130.168   |
+
+You can also request your own Static Secure Gateway IP address, which will not be listed in our Documentation and it will be available only for your team.
+
+If your Web Application requires HTTP Basic Authentication, just add the username and password in the URL:
+
+`http://username:password@example.com`
+
+
+All the user agent strings from our cross-browser cloud contain the string `endtest` at the end.
+
+You can also configure the `Proxy IP` setting for each test suite, which allows the traffic from that test to go through a Proxy Server from your side.
+
+It's also worth mentioning that our company has an ISO 27001 Information Security Certification.
+
+<Note> More details about our security policies are available in the [Security](https://endtest.io/security/) section. </Note>
+
+## 2. Tunneling
+
+Our platform can access local web applications or web applications with restricted access by using [ngrok](https://ngrok.com/).
+
+ngrok is a tool that exposes a local port to the internet via a secure tunnel.
+
+That tunnel can be used to allow our machines to access your web application and test it.
+
+You will need to sign up for a free ngrok account, then download and unzip the program.
+
+After that, you will need to set your authentication token which is available in your ngrok account.
+
+'./ngrok authtoken [TOKEN-HERE]'
+
+
+Your web application is either running locally on your machine (localhost), or it’s running on a private server (with its own URL).
+
+If the web application is running locally on your computer, you will need to know which port it’s being served on.
+
+This is typically port 80, but it may be different.
+
+For example, if your web application can be accessed at `http://localhost:9000`, then the port is `9000`.
+
+To open the tunnel, execute this command for the specific port number:
+
+'./ngrok http 9000'
+
+If your web application is running on a private server then you are likely using a URL like `http://private.example.com` to access it.
+
+In this case, you’ll create a tunnel to that URL using this command (with the private server URL swapped in):
+
+'./ngrok http -host-header=rewrite private.example.com:80'
+
+
+Once ngrok opens the tunnel, it’ll provide a public `ngrok.io` URL (e.g., `https://0b19c52g.ngrok.io`) which can be used in your test.
+
+If you open this `ngrok.io` URL in your browser, you’ll see the website.
+
+Record your tests using this `ngrok.io` URL and our platform will be able to access your web application and run the tests.
+
+You can exit the ngrok process at any time to disconnect the tunnel.
+
+When you want to execute your tests again, start ngrok again by using the same command you used earlier.
+
+<Note> Each time you restart ngrok, a new URL will be provided. You should use a variable for the URL in your test, so you can update it in only one place, or simply provide it directly in the Endtest API request for starting the test execution. More details are available in the [Variables](/advanced/variables) and [Endtest API](/advanced/endtest-api) chapters. </Note>
+
+## 3. Export
+
+The third option would be to Export the test, but you will be able to run it only on your local infrastructure.
+
+More details are available in the [Export Web Tests](/web-tests/export-web-tests) chapter.
+
+## 4. On-Premises
+
+The fourth option would be to go with our On-Premises version, which is part of our Enterprise Plan.
