@@ -1,0 +1,64 @@
+---
+title: 'How to Test Checkboxes'
+description: 'Learn how to test checkboxes'
+icon: 'square-check'
+keywords: 'endtest, checkbox, selected, selenium, checked'
+'og:title': 'How to Test Checkboxes | Endtest'
+'og:description': 'Learn how to test checkboxes'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+    
+## Introduction
+    
+Checkboxes allow users to select one or more options from a limited set of choices.
+    
+```html
+<input type="checkbox" id="pet1" name="pet1" value="cat">
+<label for="pet1"> I have a cat</label><br>
+<input type="checkbox" id="pet2" name="pet2" value="dog" checked>
+<label for="pet2"> I have a dog</label><br>
+<input type="checkbox" id="pet3" name="pet3" value="rabbit">
+<label for="pet3"> I have a rabbit</label><br><br>
+```
+
+# Assert if a Checkbox element is checked
+
+If the checkbox element is checked, it will have a `checked` attribute:
+
+```html
+<input type="checkbox" checked>
+```
+In order to determine if the checkbox element is checked or not, you have to verify if the checked attribute is present.
+
+That can be achieved in 2 different ways:
+
+### 1. By asserting the presence of the checked attribute
+
+You can use the `Element Contains Attribute` assertion type from the `Add Assertion` action:
+
+<img src="https://app.endtest.io/images/assert_attribute_doc.jpg" border="0" alt="endtest assert checkbox" height="100"/>
+
+Configure that assertion to verify if the checkbox element contains the `checked` attribute.
+
+### 2. By using JavaScript
+
+A different approach is to use an [Execute JavaScript](/web-tests/execute-javascript) step.
+
+In that step, you can fetch the `checked` property of the checkbox element.
+
+```javascript
+isItChecked = document.querySelector("css-selector-of-your-checkbox").checked;
+```
+
+<Note>Don't forget to replace the `css-selector-of-your-checkbox` string with the CSS Selector for your checkbox element.</Note>
+
+That `isItChecked` JavaScript variable will have a value of `true` or `false`, depending if the checkbox element is checked or not.
+
+We can add an assertion for that, but first we need to transfer the value from the `isItChecked` JavaScript variable to an Endtest variable.
+
+That can be done with the `Extract Value From JavaScript` option from the `Set Variable` action.
+
+After that, we can use the `Variable Assertion` option from the `Add Assertion` action to verify if the value is `true`.
+
+<img src="https://app.endtest.io/images/assert_attribute_2_doc.jpg" border="0" alt="endtest test checkbox" height="220"/>

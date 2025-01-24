@@ -1,0 +1,74 @@
+---
+title: 'Dealing with Dynamic Locators'
+description: 'How to manage elements with Dynamic Locators'
+icon: 'location-dot'
+'og:title': 'Dealing with Dynamic Locators | Endtest'
+'og:description': 'How to manage elements with Dynamic Locators'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'Dealing with Dynamic Locators | Endtest'
+'twitter:description': 'How to manage elements with Dynamic Locators'
+---
+
+## Introduction
+
+Some frameworks will generate elements with dynamic locators, meaning they might have a different ID with each rendering of the page.
+
+For example, a button might have the ID `register_325629` and then `register_861951` after the page reloads.
+
+## Solutions
+
+### 1. Change the Settings for the Endtest Chrome Extension
+
+The [Endtest Chrome Extension](https://chrome.google.com/webstore/detail/endtest/jbdgfkeimppmnfemmgfafiomihlibdfa) includes a `Settings` section that lets you configure it to ignore the `ID` attribute.
+
+<img
+  src="https://app.endtest.io/images/endtest_chrome_extension_settings.png"
+  alt="endtest chrome extension settings"
+  height="550"
+/>
+
+You can update those settings even after the recording has started.
+
+If your elements have custom data attributes, you can take advantage of them by adding the names of those attributes to the **Custom data attributes** field in the `Settings` section.
+
+### 2. Write a custom XPath
+
+The element might have a certain attribute with a value that doesn't change over time.
+
+You can write an XPath that locates the element using that attribute, for example:
+```xpath
+//*[@attribute="attribute_value"]
+```
+
+You can also write an XPath that locates the element by using only part of the value of the attribute:
+```xpath
+//*[contains(@attribute, "part_of_attribute_value")]
+```
+
+And you can write an XPath that uses multiple attributes:
+```xpath
+//*[@attribute_1="attribute_value_1" and @attribute_2="attribute_value_2"]
+```
+
+### 3. Write a custom CSS Selector
+
+The element might have a certain attribute that has a certain value that doesn't change over time.
+
+You can write a CSS Selector which locates the element by using that attribute, like this:
+
+`[attribute='attribute_value']`
+
+But what if we actually need to find out what that ID is?
+
+In order to tackle this situation, we have to use the `Execute JavaScript` action and locate the element by using one its attributes.
+
+If the element has the `title` attribute with the value `Register`, we need to run the following JavaScript code with the `Execute JavaScript` action:
+
+```javascript
+theId = document.querySelector("*[title='Register']").getAttribute("id");
+```
+After that, we can just transfer the value from that JavaScript variable to an Endtest variable with the `Extract Value from JS Variable` option from the `Set Variable` action.
+
+<Note> More details about writing custom XPaths and CSS Selectors are available in the [Finding Elements in Web Applications](/web-tests/finding-elements-in-web-applications) chapter. </Note>
+

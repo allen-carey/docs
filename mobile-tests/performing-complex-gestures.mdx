@@ -1,0 +1,84 @@
+---
+title: 'Performing Complex Gestures'
+description: 'Learn how to perform complex gestures in Mobile Tests'
+'og:title': 'Performing Complex Gestures | Endtest'
+'og:description': 'Learn how to perform complex gestures in Mobile Tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'Performing Complex Gestures | Endtest'
+'twitter:description': 'Learn how to perform complex gestures in Mobile Tests'
+---
+    
+## Introduction
+    
+In some scenarios, your test might need to perform complex gestures.
+    
+For example, pinching and zooming on a map.
+    
+You can combine multiple `Touch Actions` into a `Sequence`
+    
+Additionally, you can combine multiple `Sequences` into a `Multi Touch Actions Sequence`.
+    
+## Actions
+    
+### 1. Set Touch Action
+    
+The `Set Touch Action` allows you to define a **Touch Action**:
+    
+- **Tap and Hold**
+- **Move**
+- **Release**
+    
+<img src="https://app.endtest.io/images/set_touch_action_docs.jpg" alt="Endtest Set Touch Action" />
+    
+**Names** must be provided for each `Touch Action`.
+    
+These names will be used when executing the `Touch Actions` or when combining them into a `Sequence`.
+    
+<Note> Adding a `Set Touch Action` step will **not** execute that `Touch Action` it will only define it. </Note>
+    
+### 2. Execute Touch Actions Sequence
+    
+After defining the `Touch Actions` with `Set Touch Action` steps, you can execute them with an `Execute Touch Actions Sequence` step.
+    
+The **names** of the defined `Touch Actions` must be provided, separated by `+` signs.
+    
+![Endtest Execute Touch Actions Sequence](https://app.endtest.io/images/execute_touch_actions_doc.jpg "Endtest Execute Touch Actions Sequence")
+    
+### 3. Set Touch Actions Sequence
+    
+This action can be used if you want to store multiple `Touch Actions` in a `Sequence`.
+    
+<Note> Adding a `Set Touch Actions Sequence` step will **not** execute the `Sequence`; it will only define it. </Note>
+    
+![Endtest Set Touch Actions Sequence](https://app.endtest.io/images/set_touch_actions_sequence.jpg "Endtest Set Touch Actions Sequence")
+    
+**Names** must be provided for each `Sequence`.
+    
+These names will be used when executing the `Sequences`.
+    
+    
+### 4. Execute Multi Touch Actions Sequence
+    
+This action can be used to execute multiple `Sequences` at the same time.
+    
+A good example is when you want to pinch and zoom on a map.
+    
+Both fingers would perform separate `Sequences` simultaneously.
+    
+<img src="https://app.endtest.io/images/execute_multi_touch_actions_sequence.jpg" alt="Endtest Execute Multi Touch Actions Sequence" height="120" />
+    
+The **names** of the defined `Sequences` must be provided, separated by `+` signs.
+
+
+> To understand a complex gesture, it's best to first break down that gesture into `Sequences`.
+> 
+> Then, break down those `Sequences` into `Touch Actions`.
+> 
+> For example, pinching and zooming on a map is a gesture.
+> 
+> That gesture is made up of 2 `Sequences`.
+> 
+> Each finger will perform a separate `Sequence` simultaneously.
+> 
+> Each `Sequence` is defined by 3 `Touch Actions` (`Tap`, `Move`, `Release`), executed one after another.

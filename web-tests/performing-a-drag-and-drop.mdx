@@ -1,0 +1,70 @@
+---
+title: 'Performing a Drag and Drop'
+description: 'Learn how to perform a Drag and Drop in a Web Test'
+icon: 'hand-pointer'
+'og:title': 'Performing a Drag and Drop | Endtest'
+'og:description': 'Learn how to perform a Drag and Drop in a Web Test'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'Performing a Drag and Drop | Endtest'
+'twitter:description': 'Learn how to perform a Drag and Drop in a Web Test'
+---
+
+## Introduction
+
+There are 3 types of Drag and Drop operations that can be performed in Endtest:
+
+1. **Drag an element to another element.**  
+2. **Drag an element by a certain offset.**  
+3. **Drag a target by a certain offset.**
+
+---
+
+## 1. Drag an element to another element
+
+This is a complex action that requires two elements to be identified:
+
+1. The element to be dragged  
+2. The destination element  
+
+Declare the `Drag Element` action and the `Drop on Target` action with `Set Advanced Action` in two separate steps.
+
+Then, you need to execute those actions with the ``Execute Advanced Actions Sequence`` option.
+
+<img
+  src="https://app.endtest.io/images/docDragDrop2.png"
+  alt="endtest drag and drop"
+  height="380"
+/>
+
+<Note> The Web Tests are configured by default to use JavaScript to perform the Drag and Drop. The action works for both JavaScript Drag and Drop and HTML5 Drag and Drop. It works on all browsers. But you can also configure your test to use WebDriver Drag and Drop from the [Advanced Settings](/advanced/advanced-settings) page. </Note>
+
+---
+
+## 2. Drag an element by a certain offset
+
+This operation can be performed by using the `Move Element by Offset` method from the `Miscellaneous` action.
+
+You have to provide the locator for the element which will be dragged and the offset.
+
+<img
+  src="https://app.endtest.io/images/drag_by_offset.png"
+  alt="endtest drag by offset"
+  height="120"
+/>
+
+---
+
+## 3. Drag a target by a certain offset
+
+This operation can be performed by using the `Move Target by Offset` method from the `Miscellaneous` action.
+
+It’s useful for situations where you need to start the drag operation by clicking and holding a specific point of the element you want to drag.
+
+You have to provide the locator and the offset for the element which will be dragged, as well as the offset for the destination.
+
+<img
+  src="https://app.endtest.io/images/endtest_drag_target_by_offset.png"
+  alt="endtest drag target by offset"
+  height="120"
+/>

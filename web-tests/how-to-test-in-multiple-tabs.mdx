@@ -1,0 +1,70 @@
+---
+title: 'How to Test in Multiple Tabs'
+description: 'Learn how to find elements in multiple browser tabs and interact with them'
+icon: 'browsers'
+'og:title': 'How to Test in Multiple Tabs | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to find elements in multiple browser tabs and interact with them'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+
+## Introduction
+
+There are scenarios where you might need to interact with multiple browser tabs in a test.
+
+Any modern testing tool should support testing in multiple browser tabs.
+
+And Endtest is no exception.
+
+## Interact with an element that is in a different browser tab
+
+When a new browser tab gets opened, the test will not switch the focus automatically.
+
+Since the element is in a separate browser tab, we have to tell the test to switch the focus to that browser tab before interacting with the element.
+
+In the `Miscellaneous` action, you have the following methods:
+
+- `Switch to next tab`
+- `Switch to previous tab`
+
+Use `Switch to next tab` when you need to switch focus to the next tab.
+
+When you're done interacting with the elements from that browser tab, you can use `Switch to previous tab` to switch the focus back to the original browser tab.
+
+## Opening a new tab
+
+You may encounter scenarios where you need to open a new browser tab.
+
+For example, in a Sign Up test, you might need to fetch the activation code from the [Endtest Mailbox](/web-tests/docs/how-to-test-emails) in a different browser tab.
+
+You can use the `Open new tab` method from the `Miscellaneous` action.
+
+When using that action, the test will automatically switch focus to the new tab.
+
+Or you can add an [Execute JavaScript](/web-tests/execute-javascript) step, with the following JavaScript code:
+
+```javascript
+window.open('');
+```
+
+And you can even provide the URL directly in the JavaScript code:
+
+```javascript
+window.open('https://app.endtest.io/mailbox?email={{$email}}');
+```
+
+When using JavaScript to open a new tab, the test will not automatically switch focus to that new tab.
+
+That's why you need to add a `Switch to next tab` step after that.
+
+## Closing a tab
+
+Normally, you don't have to close browser tabs in a test.
+
+The browser tabs get closed automatically when the test execution is finished.
+
+But if you have a scenario where you need to do that, you can use the `Close tab` method from the `Miscellaneous` action.
+
+When using that action, the test will automatically switch focus to the previous tab.
+
+<Warning>The `Switch to next tab` and `Switch to previous tab` actions are using the `switch_to_window` method from Selenium WebDriver. You should never remove the `target="_blank"` attribute from link elements during your test. That is a bad practice, since it modifies the web application that's being tested. We strongly advise against using that method. </Warning>

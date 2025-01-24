@@ -1,0 +1,79 @@
+---
+title: 'IF Statements for Mobile Tests'
+description: 'Learn how to use If Statements in Mobile Tests'
+'og:title': 'IF Statements for Mobile Tests | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to use If Statements in Mobile Tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'IF Statements for Mobile Tests | Endtest'
+'twitter:description': 'Learn how to use If Statements in Mobile Tests'
+---
+    
+## Introduction
+    
+An **If Statement** is a conditional statement that, if proven true, performs a number of steps.
+    
+There are certain scenarios where we need to execute some steps only if a certain condition is met.
+    
+**IF Statements** can be nested within other IF Statements.
+    
+An **IF Statement** can cross the boundary of a test case and continue into the next test case.
+    
+    
+## If Statements
+    
+**IF Statements** can be added by using the `Start If Statement` action.
+    
+In order to close an **IF Statement**, you need to use the `End If Statement` action.
+    
+You can choose from the following types of **IF Statements**:
+    
+| **If Condition Type**               | **Description**                                                                       |
+|-------------------------------------|---------------------------------------------------------------------------------------|
+| **Element Is Present**              | Checks if an element is present                                                       |
+| **Element Is Not Present**          | Checks if an element is not present                                                   |
+| **Element Matches Value**           | Checks if the text from an element matches a certain value                           |
+| **Element Does Not Match Value**    | Checks if the text from an element does not match a certain value                    |
+| **Element Contains Value**          | Checks if the text from an element contains a certain value                          |
+| **Element Does Not Contain Value**  | Checks if the text from an element does not contain a certain value                  |
+| **Element Contains Attribute**      | Checks if an element contains a certain attribute                                    |
+| **Element Does Not Contain Attribute** | Checks if an element does not contain a certain attribute                          |
+| **Variable Assertion**              | Provides multiple ways to check a variable                                           |
+| **Page Source Contains Value**      | Checks if the Page Source contains a certain value                                   |
+| **Page Source Does Not Contain Value** | Checks if the Page Source does not contain a certain value                         |
+| **Screen Matches Screenshot**       | Performs a visual comparison between the entire screen and a baseline screenshot      |
+| **Element Matches Screenshot**      | Performs a visual comparison between an element and a baseline screenshot            |
+    
+<video
+  controls
+  className="w-full aspect-video"
+>
+  <source type="video/mp4" src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_mobile_tests_if_statement.mp4" />
+</video>
+    
+    
+## Else Statements
+    
+You can also use **Else Statements** with the `Start Else Statement` and `End Else Statement` actions.
+    
+An **Else Statement** is an alternative statement that is executed if the result of a previous **If Statement** evaluates to false.
+    
+### Example Usage
+    
+```markdown
+1. **Start If Statement**
+   - Condition: Element Is Present
+   - Locator: `//android.widget.TextView[@text='Login']`
+   
+2. **Steps to execute if condition is true:**
+   - Click on the Login button
+   - Enter username and password
+   
+3. **Start Else Statement**
+   
+4. **Steps to execute if condition is false:**
+   - Navigate to the Registration page
+   - Enter registration details
+   
+5. **End Else Statement**
+6. **End If Statement**

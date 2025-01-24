@@ -1,0 +1,87 @@
+---
+title: 'How to Test Dropdowns'
+description: 'Learn how to test dropdown menus'
+icon: 'list-dropdown'
+keywords: 'endtest, dropdown, select, selenium, checked'
+'og:title': 'How to Test dropdowns | Endtest'
+'og:description': 'Learn how to test dropdown menus'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'How to test dropdowns | Endtest'
+'twitter:description': 'Learn how to test dropdown menus'
+---
+    
+## Introduction
+    
+A dropdown element allows a user to select one or more options from a limited set of choices.
+    
+```html
+<select style="width:100px" name="pets" id="pets">
+     <option value="cat">Cat</option>
+     <option value="dog">Dog</option>
+     <option value="rabbit">Rabbit</option>
+</select>
+```
+
+The best way to interact with that `<select>` element is with the `Select Option` action.
+
+In the `Select Option` step, you have to provide the locator for the `<select>` element and the option you want to choose.
+
+In the `Option to pick` input, you need to provide the text from the `<option>` element, or the value, or the index.
+
+For example, if we want to select the `Rabbit` option from our dropdown:
+
+<table>
+  <tr>
+    <th>Strategy</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Text</td>
+    <td>Rabbit</td>
+  </tr>
+  <tr>
+    <td>Value</td>
+    <td>rabbit</td>
+  </tr>
+  <tr>
+    <td>Index</td>
+    <td>2</td>
+  </tr>
+</table>
+
+Here is what the step would look like if we use the `value`:
+
+<img src="https://app.endtest.io/images/classic_select_option.jpg" border="0" alt="endtest dropdown select" height="110"/>
+
+
+You can also pick an option by using 2 `Click` steps.
+
+The first `Click` step will open the dropdown.
+
+And the second `Click` step will pick the option.
+
+<img src="https://app.endtest.io/images/classic_select_clicks.jpg" border="0" alt="endtest dropdown select click" height="260"/>
+
+
+## 2. Modern Dropdowns
+
+Since `<select>` elements have limited styling options, you'll encounter modern dropdowns in some web applications.
+
+One good example is the `Browser` dropdown from our <a class="endtest_link" href="https://app.endtest.io/tests">Web Tests</a> section:
+
+<img src="https://app.endtest.io/images/modern_select_example.jpg" border="0" alt="endtest dropdown modern" height="160"/>
+
+A modern dropdown is usually built with `<div>` elements.
+
+Sometimes, those `<div>` elements might be generated on top of `<select>` elements that are no longer interactable.
+
+The `Select Option` action is built to work only with classic dropdowns (`<select>` elements).
+
+For modern dropdowns, you will need to use 2 `Click` steps, one to open the dropdown, and one to pick the option.
+
+<img src="https://app.endtest.io/images/modern_dropdown_approach.jpg" border="0" alt="endtest dropdown modern click" height="260"/>
+
+>Technically, you could also use an [Execute JavaScript](/web-tests/execute-javascript) step to select an option from a dropdown.
+>
+>But that option is only recommended as a last resort, since it does not mimic a real user.

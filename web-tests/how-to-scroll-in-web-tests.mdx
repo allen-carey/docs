@@ -1,0 +1,84 @@
+---
+title: 'How to Scroll in Web Tests'
+description: 'Learn how to scroll in Web Tests'
+icon: 'computer-mouse'
+'og:title': 'How to Scroll in Web Tests | Endtest'
+'og:description': 'Learn how to scroll in Web Tests'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+
+---
+    
+## Introduction
+    
+You might encounter scenarios where you need to perform a scroll.
+    
+There are **2 types of scrolls** that we'll cover in this chapter:
+    
+1. **Scroll the entire window.**
+2. **Scroll inside an element.**
+    
+By default, the [Endtest Chrome Extension](https://chrome.google.com/webstore/detail/endtest/jbdgfkeimppmnfemmgfafiomihlibdfa) will not record scroll events.
+    
+You can change this by enabling the `Record Scroll Events` option.
+    
+<img
+  src="https://app.endtest.io/images/endtest_chrome_extension_settings_small.png"
+  border="0"
+  alt="endtest recorder scroll"
+  height="100"
+/>
+    
+<Note> With that option enabled, scroll events for the entire window will be recorded. It will not record scroll events inside elements. </Note>
+    
+---
+    
+## 1. Scroll the entire window
+    
+In order to scroll the entire window, you can use the `Scroll` action.
+    
+This action allows you to provide a scroll distance in pixels or a destination.
+    
+<img
+  src="https://app.endtest.io/images/endtest_scroll_action.png"
+  border="0"
+  alt="endtest recorder scroll"
+  height="230"
+/>
+    
+You can also scroll the entire window by using an [Execute JavaScript](/web-tests/execute-javascript) step:
+    
+```javascript
+window.scrollTo(0, 500);
+```
+
+The first parameter is the destination to scroll to, along the x-axis (horizontal), in pixels.
+
+And the second parameter is the destination to scroll to, along the y-axis (vertical), in pixels.
+
+>The `Scroll` action works only for scenarios where the entire browser window needs to be scrolled. This applies when the scrollbar spans the full height of the screen and is located on the right side of the window.
+>
+>If you need to scroll within a specific element (e.g., a div with its own scrollbar), the `Scroll` action will not work for such situations.
+
+
+
+## 2. Scroll inside an element.
+
+The only way to scroll inside an element is by using an <a class="endtest_link"  href="https://app.endtest.io/guides/docs/execute-javascript/">Execute JavaScript</a> step:
+
+```javascript
+document.querySelector("css-selector-of-element").scrollTop = 500;
+```
+
+You will need to get the CSS Selector for your element and add in the JavaScript code.
+
+And you will also specify the number of pixels the element's content is scrolled vertically.
+
+
+>If the number is a negative value, the number is set to "0".
+>
+>If the element cannot be scrolled, the number is set to "0".
+>
+>If the number is greater than the maximum allowed scroll amount, the number is set to the maximum number.
+>
+>You can also use `scrollLeft` if you want to scroll horizontally inside an element.

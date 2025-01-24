@@ -1,0 +1,64 @@
+---
+title: 'How to Test in iframes'
+description: 'Learn how to find elements in iframes and interact with them'
+icon: 'window-frame'
+'og:title': 'How to Test in iframes | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to find elements in iframes and interact with them'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+
+## Introduction
+
+An HTML iframe is used to display a web page within a web page.
+
+Most modern web applications might use iframes in some sections.
+
+For example, on a Checkout page, the credit card inputs are usually inside an iframe.
+
+Endtest allows you to easily interact with elements from iframes.
+
+## Detect if an element is inside an iframe
+
+We can detect if an element is inside an iframe by inspecting the element with the Chrome Developer Tools.
+
+An easier way is to perform a Right Click near the element in your browser and see if the `View Frame Source` option is present in the context dropdown.
+
+## Interact with an element that is inside an iframe
+
+Since the iframe is a separate web page, we have to tell the test to switch the focus to that iframe before interacting with an element inside it.
+
+In the `Miscellaneous` action, you have the following methods:
+
+- `Switch to iframe`
+- `Switch back to main`
+
+Use `Switch to iframe` when you need to switch focus to the iframe.
+
+When you're done interacting with the elements from the iframe, use `Switch back to main` to switch the focus back to the main web page.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_iframes_small.mp4"
+></video>
+
+<br />
+
+## Dealing with nested iframes
+
+There are situations where you might encounter nested iframes (an iframe inside another iframe).
+
+The solution is to switch focus to the first iframe, and then to the next one.
+
+After you're done interacting with the elements from the nested iframe, use one `Switch back to main` step to return the focus to the main web page.
+
+## Dealing with iframes that have dynamic IDs
+
+In some cases, an iframe might have a dynamic ID.
+
+Since a dynamic ID keeps changing, it isn't a reliable locator.
+
+The solution is to [write a custom XPath or CSS Selector](/web-tests/finding-elements-in-web-applications) for that `Switch to iframe` step.
+
+<Note> The `Switch to iframe` action is using the `switch_to` method from Selenium WebDriver. The `Switch back to main` action is switching to the `default_content`. </Note>

@@ -1,0 +1,158 @@
+---
+title: 'Finding Elements in Mobile Applications'
+description: 'Learn how to find elements in Mobile Applications'
+'og:title': 'Finding Elements in Mobile Applications | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to find elements in Mobile Applications'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'Finding elements in Mobile Applications | Endtest'
+'twitter:description': 'Learn how to find elements in Mobile Applications'
+---
+    
+## Introduction
+    
+Our engine is using Appium to locate the elements in Mobile Applications.
+    
+The different locators are as follows:
+* Accessibility ID
+* Class Name
+* ID
+* Name
+* Text Inside
+* XPath
+* Coordinates
+* Android UI Automator
+* iOS UI Automation
+    
+## Know your locators
+    
+| **Locate By**         | **Description**                                                                                                                                                                                                                           |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Accessibility ID**  | Read a unique identifier for a UI element. For iOS it's the accessibility-id attribute. For Android it is the element's content-desc attribute.                                                                                       |
+| **Class Name**        | For iOS it is the full name of the XCUI element and begins with XCUIElementType. For Android it is the full name of the UIAutomator2 class (e.g.: android.widget.TextView)                                                            |
+| **ID**                | Native element identifier. resource-id for Android; name for iOS.                                                                                                                                                                         |
+| **Name**              | Name of element                                                                                                                                                                                                                           |
+| **Text Inside**       | Search for element by using the value of the text attribute.                                                                                                                                                                          |
+| **XPath**             | Search the app XML source using XPath (not recommended, has performance issues)                                                                                                                                                        |
+| **Coordinates**       | Search for element by using Coordinates, only available for touch actions.                                                                                                                                                             |
+| **Android UI Automator** | Use the UI Automator API, in particular the UiSelector class to locate elements. In Appium you send the Java code, as a string, to the server, which executes it in the application's environment, returning the element or elements. |
+| **iOS UI Automation** | When automating an iOS application, Apple's Instruments framework can be used to find elements                                                                                                                                       |
+
+Even if you are using our Endtest Element Inspector to locate your elements, you might still encounter situations where you need to fetch a locator.
+    
+But what can you do if you're getting an error message that the element could not be found?
+    
+## Tips and Tricks:
+    
+### 1. Make sure that your locator is unique.
+    
+If our engine finds more than one element with that locator, it will just go with the first one, which might not be the one you're interested in.
+    
+In that case, you will also see a `[WARNING]` in the test execution results.
+    
+### 2. Try to use a different locator type.
+    
+For example, if you were using ID, you can try with XPath or Accessibility ID.
+    
+### 3. Are you testing a Hybrid Mobile Application?
+    
+Hybrid Mobile Applications have a Native Context and a Web context, you need to switch to a context before you can access the elements which are inside it.
+    
+You can use the `Get List of Contexts`, `Get Current Context` and `Switch to Context` actions to achieve that.
+    
+Those actions can be found in the `Miscellaneous` category.
+    
+You can also get the name of the WebView context by using the `Extract WebView Context Name` option from the `Set Variable` action.
+    
+Since you cannot perform Touch Actions on elements which are in the Web Context, you need to extract their coordinates while you're in the Web Context and then switch back to the Native Context and perform the Touch Actions by using those coordinates.
+    
+Or you can use the `Click (Web Context)` option from the `Miscellaneous` category, the option only works in a Web Context.
+    
+### 4. How do I get the locators for the elements from my Mobile Application?
+    
+The easiest way would be to add a `Get Element Inspector` step in your test, that will generate an HTML file from which you can extract the locators.
+    
+[Sample Element Inspector](https://endtest-files.s3.us-west-2.amazonaws.com/Element_Inspector_1.html)
+    
+<video
+  controls
+  className="w-full aspect-video"
+>
+  <source type="video/mp4" src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_element_inspector.mp4" />
+</video>
+    
+<br />
+    
+The other option is to use the `Get Page Source` method from the `Miscellaneous` action in your test.
+    
+If you're testing a Hybrid Mobile App, you will get the page source that is tied to your current context, you can switch between contexts to get all the page sources.
+    
+In order to inspect the elements from a WebView Context, you should use the `Get Page Source` method from the `Miscellaneous` action only after you switched to that WebView Context.
+    
+That Page Source text file will contain the HTML of the WebView Context, and you can even save that content into a `.htm` file and open it in your own browser.
+    
+<Note> The Element Inspector files will only show the elements from the Native Context, regardless if your test is in the Native Context or in the WebView Context at that moment. </Note>
+    
+<Tip> We strongly recommend that you read more about finding elements with Appium [here](https://appium.io/docs/en/commands/element/find-elements/). </Tip>
+    
+### 5. Try to identify what makes the element unique.
+    
+`//*[@attribute="attribute_value"]`
+    
+Or if you only want to add a part of the value from the attribute:
+    
+`//*[contains(@attribute, "part_of_attribute_value")]`
+    
+And you can also write an XPath which uses multiple attributes:
+    
+`//*[@attribute_1 = "attribute_value_1" and @attribute_2 = "attribute_value_2" ]`
+    
+The same XPath can be written like this:
+    
+`//*[@attribute_1 = "attribute_value_1"][@attribute_2 = "attribute_value_2" ]`
+    
+To narrow the search, you can also mention the type of the element in the XPath:
+    
+`//android.widget.ImageButton[@attribute="attribute_value"]`
+    
+For example, if you're targeting the element of type `android.widget.ImageButton` with the `content-desc` attribute that has the value `Back`:
+    
+`//android.widget.ImageButton[@content-desc="Back"]`
+    
+If multiple elements have the same XPath, you can wrap the XPath in parentheses and provide the index to precisely target one of them:
+    
+**The first element:**
+    
+`(//android.widget.ImageButton[@content-desc="Back"])[1]`
+    
+**The second element:**
+    
+`(//android.widget.ImageButton[@content-desc="Back"])[2]`
+    
+**The third element:**
+    
+`(//android.widget.ImageButton[@content-desc="Back"])[3]`
+    
+In some cases, if your XPath contains a `text` attribute with a value that has spaces inside, the Appium engine might not be able to locate that element.
+    
+For example, the Appium engine might not be able to locate the element with this XPath:
+    
+`//android.widget.TextView[@package="com.acme.tools" and @text="Carpenter tools"]`
+    
+This can happen because of the space in the `Carpenter tools` text.
+    
+The solution would be to rewrite that XPath to only use a part of the value from the `text` attribute:
+    
+`//android.widget.TextView[@package="com.acme.tools"][contains(@text,"Carpenter")]`
+    
+### 6. Use the appropriate action.
+    
+In some situations, it might not be intuitive to know what action needs to be used.
+    
+For example, if you want to scroll, you need to use the `Flick` action.
+    
+You can read more details about that in the [How to scroll in Mobile Tests](/mobile-tests/how-to-scroll-in-mobile-tests) chapter.
+    
+Another example is when you want to select an option from an iOS dropdown element.
+    
+The solution is to locate the element of type `XCUIElementTypePickerWheel` and use a `Write Text` action, instead of trying to perform a `Single Tap` on the option.

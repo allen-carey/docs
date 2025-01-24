@@ -1,0 +1,43 @@
+---
+title: 'Dealing with Canvas Elements'
+description: 'How to deal with Canvas Elements'
+icon: 'diagram-lean-canvas'
+'og:title': 'Dealing with Canvas Elements | Endtest'
+'og:description': 'How to deal with Canvas Elements'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'Dealing with Canvas Elements | Endtest'
+'twitter:description': 'How to deal with Canvas Elements'
+---
+
+## Introduction
+
+The HTML `<canvas>` element is used to draw graphics on the fly via JavaScript.
+
+The items inside a `<canvas>` element do **not** have their own locators.
+
+## Solution
+
+In order to precisely click on a certain position in a `<canvas>` element, you have to provide the offset, by using the **Click with Offset** action:
+
+<img
+  src="https://app.endtest.io/images/docOffset2.png"
+  alt="endtest canvas"
+  height="90"
+/>
+
+The **Relative Position** represents the number of pixels to the right and down, starting from the top-left corner of your `<canvas>` element.
+
+Since there is no way to retrieve the coordinates of a position from a `<canvas>` element, you can use an `Execute JavaScript` step to draw a line on the `<canvas>` element from the top-left corner to the position you are targeting.
+
+This can help you identify the coordinates of a specific position on a `<canvas>` element.
+
+Sample JavaScript code:
+
+```javascript
+canvas = document.querySelector("#map-page > div > canvas");
+ctx = canvas.getContext("2d");
+ctx.moveTo(0, 0);
+ctx.lineTo(190, 320);
+ctx.stroke();
+```

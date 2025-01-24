@@ -1,0 +1,130 @@
+---
+title: 'How to Scroll in Mobile Tests'
+description: 'Learn how to scroll in Mobile Tests'
+'og:title': 'How to Scroll in Mobile Tests | Endtest'
+'og:description': 'Learn how to scroll in Mobile Tests'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'How to scroll in Mobile Tests | Endtest'
+'twitter:description': 'Learn how to scroll in Mobile Tests'
+---
+    
+## Introduction
+    
+Our engine for Mobile Tests uses Appium to locate and interact with elements in native and hybrid mobile applications.
+    
+Appium does not provide direct `Scroll` or `Swipe` actions.
+    
+However, we can achieve the same effect with a `Flick` action or a `Move` action.
+    
+We simply need to flick or move in the opposite direction of the desired scroll or swipe.
+    
+## Options
+    
+### 1. Using the `Flick` action
+    
+The `Flick` action requires **3 parameters**:
+    
+- **Locator Type**
+- **Locator**
+- **Offset to flick by**
+    
+<img src="https://app.endtest.io/images/endtest_mobile_flick.png" alt="Endtest Flick" height="160" />
+    
+The value for the `Offset to flick by` is comprised of an **X offset** and a **Y offset**, separated by a comma.
+    
+The offset is equivalent to the scrolling distance in this case.
+    
+As you can see, we need an element in order to flick.
+    
+The `Flick` action does not work with all elements, and there is no attribute to indicate if an element is suitable or not.
+    
+If an element is not suitable for the `Flick` action, performing that action on that element will not result in a scroll on that page.
+    
+You will not see any errors in the logs in that case; you will just notice that it has no effect.
+    
+This is because the element was located and the action was performed, but Appium does not throw any errors if the `Flick` action did not result in a scroll.
+    
+<Tip> Try performing the `Flick` action with different elements until you find one that works. It's a trial and error process. </Tip>
+    
+ 
+<Note> For some applications, you might get an error that the `Flick` action is not supported. This is because the default versions of Appium used by BrowserStack and Sauce Labs might not support the `Flick` action for some applications. In this case, you can try changing the `Appium Version` from the `Settings` section of that test suite. </Note>
+    
+    
+### 2. Using the `Move` action
+    
+The `Move` action requires **3 parameters**:
+    
+- **Locator Type**
+- **Locator**
+- **Destination**
+
+<img src="https://app.endtest.io/images/move_for_docs.png" alt="Endtest Move" height="140" />
+    
+The value for the `Destination` is comprised of an **X coordinate** and a **Y coordinate**, separated by a comma.
+    
+As you can see, we need an element in order to move.
+    
+The `Move` action does not work with all elements, and there is no attribute to indicate if an element is suitable or not.
+    
+If an element is not suitable for the `Move` action, performing that action on that element will not result in a scroll on that page.
+    
+You will not see any errors in the logs in that case; you will just notice that it has no effect.
+    
+This is because the element was located and the action was performed, but Appium does not throw any errors if the `Move` action did not result in a scroll.
+    
+<Tip> Try performing the `Move` action with different elements until you find one that works. It's a trial and error process. </Tip>
+    
+    
+## Scroll Types
+    
+### 1. Scroll Down
+    
+To scroll down, we must flick up or move up.
+    
+- **Using the `Flick` action:**  
+  Add a **negative value** for the Y offset:  
+  `0, -500`
+    
+- **Using the `Move` action:**  
+  Add a **small non-negative value** for the Y coordinate:  
+  `0, 0`
+    
+    
+### 2. Scroll Up
+    
+To scroll up, we must flick down or move down.
+    
+- **Using the `Flick` action:**  
+  Add a **positive value** for the Y offset:  
+  `0, 500`
+    
+- **Using the `Move` action:**  
+  Add a **large non-negative value** for the Y coordinate:  
+  `0, 500`
+    
+    
+### 3. Scroll Left
+    
+To scroll left, we must flick right or move right.
+    
+- **Using the `Flick` action:**  
+  Add a **positive value** for the X offset:  
+  `500, 0`
+    
+- **Using the `Move` action:**  
+  Add a **large non-negative value** for the X coordinate:  
+  `500, 0`
+    
+    
+### 4. Scroll Right
+    
+To scroll right, we must flick left or move left.
+    
+- **Using the `Flick` action:**  
+  Add a **negative value** for the X offset:  
+  `-500, 0`
+    
+- **Using the `Move` action:**  
+  Add a **small non-negative value** for the X coordinate:  
+  `0, 0`

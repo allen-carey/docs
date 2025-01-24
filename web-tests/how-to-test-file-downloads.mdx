@@ -1,0 +1,38 @@
+---
+title: 'How to Test File Downloads'
+description: 'Learn how to test file downloads in your tests'
+icon: 'download'
+'og:title': 'How to Test File Downloads | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to test file downloads in your tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'How to test File Downloads | Endtest'
+'twitter:description': 'Learn how to test file downloads in your tests'
+---
+
+## Introduction
+
+In a Web Test, you can add steps to verify file downloads.
+
+After you trigger a file download, you can extract information about the file in variables.  
+Then, you can use those variables in other steps, such as [Assertions](/web-tests/assertions-for-web-tests) and [If Statements](/web-tests/if-statements-for-web-tests).
+
+## Details
+
+You can extract information about a downloaded file by using these methods from the [Set Variable](/advanced/how-to-use-variables) action:
+
+1. `Extract Name of Most Recent Downloaded File`
+2. `Extract Size of Most Recent Downloaded File`
+3. `Extract MIME Type of Most Recent Downloaded File`
+
+<Note> **Waiting for a download to complete**  
+Endtest will automatically wait for a download to complete when using one of those methods.  
+There is no need to add a [Pause](/advanced/waits/#3-pause) step, unless the download takes more than 120 seconds, which is the default download timeout. </Note>
+
+After you’ve extracted the information into variables, you can verify the values from those variables by using the `Variable Assertion` method from the `Add Assertion` action.
+
+You can also clear the Downloads directory by using the `Clear Downloads Directory` method from the `Miscellaneous` action.
+
+<Note> **Browser Support**  
+File downloads can be tested in Chrome, Edge, Firefox, and mobile browsers.  
+File downloads cannot be tested in Safari and Internet Explorer 11. </Note>

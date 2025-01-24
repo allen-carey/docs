@@ -1,0 +1,69 @@
+---
+title: 'Testing WebRTC Applications'
+description: 'How to test WebRTC applications'
+icon: 'camera-web'
+iconType: 'solid'
+'og:title': 'Testing WebRTC Applications | Endtest'
+'og:description': 'How to test WebRTC applications'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'Testing WebRTC Applications | Endtest'
+'twitter:description': 'How to test WebRTC applications'
+---
+
+## Introduction
+
+Web Real-Time Communications (**WebRTC**) is an open-source technology created by Google that allows peer-to-peer communication in web browsers and mobile applications through APIs. This includes audio, video, and data transfers.
+
+A large number of web applications are using the WebRTC technology, such as those used for online meetings and video conferences.
+
+---
+
+## Media Emulation
+
+The machines from our cloud are not connected to any webcams, microphones, or speakers.  
+However, we use a technology called **Media Emulation**, which is enabled by default for all users.
+
+When accessing a webcam in a Web Test, you will see a live stream that looks like this:
+
+<img
+  src="https://app.endtest.io/images/webrtc_emulation.png"
+  alt="endtest webrtc emulation fake"
+  height="250"
+/>
+
+There is also the option to provide your own `y4m` video file that will be shown in the webcam live feed.
+
+Only certain browsers support the **Media Emulation** technology:
+
+| Browser              | Media Emulation | Custom y4m file |
+|----------------------|-----------------|-----------------|
+| Chrome               | ✅              | ✅               |
+| Edge                 | ✅              | ✅               |
+| Firefox              | ✅              | ⛔               |
+| Safari               | ⛔              | ⛔               |
+| Internet Explorer 11 | ⛔              | ⛔               |
+| Mobile browsers      | ✅              | ✅               |
+
+<Note> Currently, the option to add a custom `.y4m` file is only available in our backend admin panel. You can write to our Support Team, and they will help you add it for your account. Full Media Emulation for Safari and Firefox is only available with dedicated machines on Endtest. </Note>
+
+---
+
+## How to test WebRTC scenarios
+
+If you are testing an online meeting application, you might need to connect multiple users to the same meeting.
+
+This can be achieved by using multiple browser tabs in your test. It’s easy to manage multiple browser tabs with the methods provided in the `Miscellaneous` action:
+
+- **Open new tab**  
+- **Switch to next tab**  
+- **Switch to previous tab**
+
+A better approach could be to have **separate test executions** connecting to the same meeting.
+
+1. Start a **test execution** that will start one or more **different test executions**.  
+2. Use the [Send API Request](/advanced/send-api-requests) step to call the [Endtest API](/advanced/how-to-use-the-endtest-api) and trigger a new test execution.
+
+This way, you can connect to the same meeting from different browsers on different machines.
+
+Managing and syncing the separate test executions can be done with [Wait Until](/advanced/waits#2-wait-until) and [Pause](/advaned/waits#3-pause) steps.

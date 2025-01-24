@@ -1,0 +1,151 @@
+---
+title: 'How to Test Emails'
+description: 'Learn how to test emails with the Endtest Mailbox'
+icon: 'envelope'
+'og:title': 'How to Test Emails | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to test emails with the Endtest Mailbox'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'How to test Emails | Endtest'
+'twitter:description': 'Learn how to test emails with the Endtest Mailbox'
+---
+
+## Introduction
+
+The majority of Web Applications send emails when certain actions are triggered.
+
+In some cases, you may want access to those emails during your tests to confirm their delivery, check their contents, or extract information to use within your test.
+
+For example, you can test registering a user account, receiving a verification email, clicking a link to verify the email address, and asserting that the email has been verified.
+
+You can use our [Endtest Mailbox](https://app.endtest.io/mailbox) to access emails.  
+The way it works is similar to a disposable email service.  
+It can be accessed manually or in an automated test, through the UI or with a script.
+
+---
+
+## 1. Access the Endtest Mailbox through the UI
+
+### Steps
+
+1. Choose an email address that has the `endtest-mail.io` domain.  
+2. Make sure your email gets sent to that email address.  
+3. Add a `Pause` of 30 seconds or a [Wait Until](/advanced/waits#2-wait-until) step.  
+4. Access the [Endtest Mailbox](https://app.endtest.io/mailbox) for that email address with a `Go to URL` step.
+
+#### Example
+
+Let's suppose you picked the following email address: `bruce.wayne8@endtest-mail.io`.
+
+You can access the Inbox for that email address by going to this URL:
+
+[https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io](https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io)
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_mailbox.mp4"
+></video>
+
+<br />
+
+The email address doesn't need to be pre-registered on our side.
+
+You can even generate a random string and prepend it to the `@endtest-mail.io` string.
+
+Or you can generate a random email address with the `Random Email` option from the `Set Variable` action.
+
+You can also open the Endtest Mailbox in a new browser tab, by using the `Open new tab` option from the `Miscellaneous` action.
+
+In order to switch back to your initial browser tab, you can use the `Switch to previous tab` option from the `Miscellaneous` action.
+
+If you're not sure how long it takes for your application to deliver the email, you can add a `Wait Until` step that will also automatically refresh the page at certain intervals.  
+The `Wait Until` option can be found in the `Miscellaneous` action.
+
+---
+
+## 2. Access the Endtest Mailbox from a script
+
+### Steps
+
+1. Choose an email address that has the `endtest-mail.io` domain.  
+2. Make sure your email gets sent to that email address.  
+3. Add a pause of 30 seconds in your script.  
+4. Access the Endtest Mailbox in your script by sending a GET request to the `https://app.endtest.io/mailbox` endpoint with the following parameters: `email` and `format`.
+
+Currently, the only option is to fetch the emails in JSON format by using `format=json`.
+
+Let's suppose you picked the following email address: `bruce.wayne8@endtest-mail.io`.
+
+You can access the emails for that address with the following GET request:
+
+[https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&format=json](https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&format=json)
+
+The JSON response will have the following structure:
+
+```json
+[
+  {
+    "fromName": "",
+    "fromAddress": "",
+    "toAddress": "",
+    "subject": "",
+    "html": "",
+    "timestamp": ""
+  },
+  {
+    "fromName": "",
+    "fromAddress": "",
+    "toAddress": "",
+    "subject": "",
+    "html": "",
+    "timestamp": ""
+  }
+]
+```
+The email address doesn't need to be pre-registered on our side.
+You can even generate a random string and prepend it to the `@endtest-mail.io` string.
+
+## 3. Delete all the emails sent to an email address
+
+### Steps
+
+Access the Endtest Mailbox in your test or script by sending a GET request to the `https://app.endtest.io/mailbox` endpoint with the following parameters: `email` and `action=delete`.
+
+Let's suppose you picked the following email address: `bruce.wayne8@endtest-mail.io`
+
+You can delete the emails for that address with the following GET request:
+
+<a class="endtest_link" href="https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&action=delete">https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&action=delete</a>
+
+## 4. Using email subaddress
+
+### Steps
+
+An email subaddress refers to the practice of adding a plus sign (+) and additional characters to the local part of an email address to create variations that still deliver to the same inbox.
+
+For example, in the email `batman+label@endtest-mail.io`, `+label` is a form of subaddressing.
+
+If you send separate emails to `batman+1@endtest-mail.io` and `batman+2@endtest-mail.io`, they will still be accessible in the Endtest Mailbox. Each email will be delivered to its own subaddressed variation without needing any special parameters.
+
+However, if you include the `subaddress=true` parameter, you can view all emails addressed to the base email, like `batman@endtest-mail.io`, in one mailbox, regardless of the subaddress:
+
+<a class="endtest_link" href="https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&subaddress=true&from=alerts@gotham.com">https://app.endtest.io/mailbox?email=bruce.wayne@endtest-mail.io&subaddress=true&from=alerts@gotham.com</a>
+
+For Security reasons, it's mandatory to also add the `from` parameter when using `subaddress=true`.
+
+The value provided in the `from` parameter needs to match the email address from which those emails were sent.
+
+And the `subaddress=true` parameter can also be used to get the emails in JSON format or to delete the emails.
+
+>When accessing emails in the Endtest Mailbox, you should add a [Wait Until](/advanced/waits/#2-wait-until) step or a 30 second [Pause](/advanced/waits/#3-pause) step before the `Go to URL` step, to allow your web application to have enough time to send the email.
+>
+>Emails sent to this service are technically public and can be accessed by anyone with knowledge of the username being used.
+>
+>While using a dynamic username provides some level of privacy, you should avoid inclusion of sensitive data in your emails when using this service.
+>
+>Please note that the emails will be automatically deleted after 7 days.
+>
+>You can also send emails with the [Endtest Utilities](/advanced/utilities).
+
+<Note> `Endtest Mailbox` only works with `endtest-mail.io` emails. </Note>

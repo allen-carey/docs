@@ -1,0 +1,88 @@
+---
+title: 'Dealing with reCAPTCHA'
+description: 'How to execute tests on a website with reCAPTCHA'
+icon: 'arrows-spin'
+iconType: 'duotone'
+'og:title': 'Dealing with reCAPTCHA | Endtest'
+'og:description': 'How to execute tests on a website with reCAPTCHA'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'Dealing with reCAPTCHA | Endtest'
+'twitter:description': 'How to execute tests on a website with reCAPTCHA'
+---
+
+## Introduction
+
+The reCAPTCHA system has been specifically designed to establish that a computer user is human, in order to protect websites from bots.
+
+It cannot be tricked by any script.
+
+The only solution in this case is to add a special condition in the code from your Web Application that will disable the reCAPTCHA system when the traffic comes from Endtest.
+
+However, if you are dealing with a basic CAPTCHA system that requires you to type the letters from an image, you can try to perform Optical Character Recognition (OCR) on that image and extract the text with the `Extract Value from Element with OCR` option from the `Set Variable` action.
+
+<img
+  src="https://app.endtest.io/images/standard_captcha.jpg"
+  border="0"
+  alt="endtest captcha 2"
+  height="200"
+/>
+
+## Details
+
+There are 2 ways to detect if the traffic is coming from Endtest:
+
+### 1. Secure Gateway IPs
+
+All the traffic that comes from Endtest comes through our list of Secure Gateway IPs:
+
+| Secure Gateway IP Addresses |
+|-----------------------------|
+| 34.211.40.72                |
+| 35.166.159.89               |
+| 207.254.40.71               |
+| 207.254.60.102              |
+| 52.89.18.176                |
+| 52.26.12.35                 |
+| 54.187.169.42               |
+| 52.43.87.222                |
+| 34.214.85.4                 |
+| 54.184.162.15               |
+| 44.237.178.201              |
+| 44.238.105.245              |
+| 44.228.22.115               |
+| 35.81.185.74                |
+| 207.254.52.64               |
+| 44.241.213.227              |
+| 52.26.206.66                |
+| 52.13.40.64                 |
+| 44.238.190.158              |
+| 207.254.60.6                |
+| 207.254.41.137              |
+| 207.254.60.76               |
+| 34.213.62.124               |
+| 54.191.53.140               |
+| 18.237.140.182              |
+| 52.11.28.247                |
+| 44.240.94.219               |
+
+If you want to use Real IP Geolocation in your tests, you'll have to add these entries to the whitelist as well:
+
+| Geolocation            | IP Address       |
+|------------------------|------------------|
+| San Francisco, US      | 52.53.118.130    |
+| Seattle, US            | 20.64.225.137    |
+| Montreal, Canada       | 3.97.155.50      |
+| London, UK             | 3.9.107.187      |
+| Frankfurt, Germany     | 52.28.171.236    |
+| Eemshaven, Netherlands | 34.90.84.125     |
+| Dubai, UAE             | 3.28.26.211      |
+| Tel Aviv, Israel       | 51.16.199.215    |
+| Tokyo, Japan           | 18.179.93.49     |
+| Seoul, South Korea     | 13.209.174.252   |
+| Singapore              | 54.151.171.44    |
+| Sydney, Australia      | 54.206.130.168   |
+
+### 2. User Agent Strings
+
+All the user agent strings from our cross-browser cloud contain the string `endtest` at the end.

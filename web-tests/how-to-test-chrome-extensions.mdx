@@ -1,0 +1,43 @@
+---
+title: 'How to Test Chrome Extensions'
+description: 'Learn how to test Chrome Extensions'
+icon: 'chrome'
+'og:title': 'How to Test Chrome Extensions | Endtest'
+'og:description': 'Learn how to test Chrome Extensions'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'How to test Chrome Extensions | Endtest'
+'twitter:description': 'Learn how to test Chrome Extensions'
+---
+
+## Introduction
+
+You can use Endtest to test Chrome Extensions.
+
+## Steps
+
+1. Your **Chrome Extension** must be in a **ZIP** file.  
+2. Upload that **ZIP** file in our [Drive](https://app.endtest.io/drive) section.  
+3. Copy the **File Download URL** for the uploaded **ZIP** file.  
+4. Go to the **Advanced Settings** section for your test suite.  
+5. Paste the **File Download URL** in the **Add Chrome Extension** input.  
+6. Click on the **Save** button.  
+7. Execute the test suite in **Chrome**.
+
+The **Chrome Extension** will be automatically loaded in the **Chrome** browser once the test execution starts.
+
+In order to access certain sections from the **Chrome Extension**, you might need to get the **ID** of that extension.
+
+The **ID** will be unique for each test execution.
+
+You can use an `Execute JavaScript` step to extract the **ID** from the URL for that **Chrome Extension** and store it inside a JavaScript variable.
+
+After that, you can transfer the **ID** into an Endtest variable by using the **Extract value from JS variable** option from the **Set Variable** action.
+
+This will allow you to join that Endtest variable with other strings and variables in the `Go to URL` steps in order to access certain sections from your **Chrome Extension**.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_test_chrome_extension.mp4"
+></video>

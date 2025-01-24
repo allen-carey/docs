@@ -2,9 +2,13 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Endtest Docs",
   "theme":"venus",
+  "sidebar": {
+    "items": "container"
+  },
   "logo": {
     "dark": "/logo/endtest_logo_full_white.png",
-    "light": "/logo/et-logo.png"
+    "light": "/logo/et-logo.png",
+    "href": "https://endtest.io/"
   },
   "favicon": "/endtest_logo_1.png",
   "colors": {
@@ -18,60 +22,123 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:contact@endtest.io"
+      "name": "Sign Up",
+      "url": "https://endtest.io/signup"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
+    "name": "Log In",
     "url": "https://app.endtest.io"
   },
 
 
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Documentation",
       "pages": [
         "introduction",
-        "quickstart"
-      ]
-    },
-    {
-      "group": "Web Tests",
-      "pages": [
+        "quickstart",
+        {
+          "group": "Web Tests",
+          "pages": [
         "web-tests/how-to-create-web-tests",
         "web-tests/finding-elements-in-web-applications",
         "web-tests/how-to-execute-web-tests",
         "web-tests/assertions-for-web-tests",
         "web-tests/if-statements-for-web-tests",
-        "web-tests/web-applications-with-restricted-access"
-      ]
-    },
-    {
-      "group": "Mobile Tests",
+        "web-tests/web-applications-with-restricted-access",
+        "web-tests/how-to-test-in-iframes",
+        "web-tests/how-to-test-in-multiple-tabs",
+        "web-tests/how-to-test-file-uploads",
+        "web-tests/how-to-test-file-downloads",
+        "web-tests/how-to-test-emails",
+        "web-tests/how-to-test-pdf-files",
+        "web-tests/how-to-test-chrome-extensions",
+        "web-tests/dealing-with-recaptcha",
+        "web-tests/dealing-with-dynamic-locators",
+        "web-tests/dealing-with-canvas-elements",
+        "web-tests/performing-a-drag-and-drop",
+        "web-tests/execute-javascript",
+        "web-tests/testing-webrtc-applications",
+        "web-tests/how-to-scroll-in-web-tests",
+        "web-tests/how-to-test-checkboxes",
+        "web-tests/how-to-test-dropdowns",
+        "web-tests/dealing-with-sessions",
+        "web-tests/web-crawler",
+        "web-tests/export-web-tests",
+        "web-tests/migrating-from-selenium"
+          ]
+        },
+        {"group": "Mobile Tests",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "mobile-tests/how-to-create-mobile-tests",
+        "mobile-tests/finding-elements-in-mobile-applications",
+        "mobile-tests/how-to-execute-mobile-tests",
+        "mobile-tests/assertions-for-mobile-tests",
+        "mobile-tests/if-statements-for-mobile-tests",
+        "mobile-tests/how-to-scroll-in-mobile-tests",
+        "mobile-tests/performing-complex-gestures"
       ]
-    },
-    {
-      "group": "Advanced",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ]
-    },
-    {
-      "group": "Integrations",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ]
-    }
-  ],
+      },
+      {
+        "group": "Advanced",
+        "pages": [
+          "advanced/how-to-use-variables",
+          "advanced/waits",
+          "advanced/how-to-use-the-endtest-api",
+          "advanced/how-to-use-the-scheduler",
+          "advanced/drive",
+          "advanced/adding-collaborators",
+          "advanced/computer-vision",
+          "advanced/importing-test-cases",
+          "advanced/using-loops",
+          "advanced/data-driven-testing",
+          "advanced/send-api-requests",
+          "advanced/read-sms",
+          "advanced/execute-sql-queries",
+          "advanced/self-healing-tests",
+          "advanced/email-notifications",
+          "advanced/slack-notifications",
+          "advanced/pagerduty-notifications",
+          "advanced/webhook-notifications",
+          "advanced/automatic-backup",
+          "advanced/advanced-settings",
+          "advanced/multiple-environments",
+          "advanced/how-to-stop-a-test",
+          "advanced/utilities",
+          "advanced/utilities-api",
+          "advanced/team",
+          "advanced/on-premises"
+        ]
+      },
+      {
+        "group": "Integrations",
+        "pages": [
+          "integrations/atlassian-jira",
+          "integrations/slack",
+          "integrations/pagerduty",
+          "integrations/microsoft-teams",
+          "integrations/mattermost",
+          "integrations/jenkins",
+          "integrations/github",
+          "integrations/azure-devops",
+          "integrations/gitlab",
+          "integrations/teamcity",
+          "integrations/circleci",
+          "integrations/travisci",
+          "integrations/bitbucket",
+          "integrations/heroku",
+          "integrations/bamboo-server",
+          "integrations/test-case-management",
+          "integrations/sso",
+          "integrations/browserstack",
+          "integrations/sauce-labs"
+        ]
+      }      
+  ]
+}
+],
+  
   "footerSocials": {
     "x": "https://x.com/endtest_io",
     "linkedin": "https://linkedin.com/company/endtest"

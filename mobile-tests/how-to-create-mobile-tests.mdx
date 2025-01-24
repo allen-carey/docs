@@ -1,0 +1,231 @@
+---
+title: 'How to Create Mobile Tests'
+description: 'Learn how to record or manually create Mobile Tests'
+'og:title': 'How to Create Mobile Tests | Endtest'
+'og:description': 'Learn how to record or manually create Mobile Tests'
+'og:site_name': 'Endtest'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+    
+## Introduction
+    
+You can create Mobile Tests for Android and iOS applications, both native and hybrid.
+
+There are **2 ways** to create Mobile Tests:
+1. With the **Endtest Mobile Recorder**.
+2. **Manually adding test suites, test cases, and steps**.
+    
+## 1. With the Endtest Mobile Recorder
+    
+The **Endtest Mobile Recorder** allows you to record Mobile Tests directly in your browser.
+
+In order to record Mobile Tests, you must connect to an _external grid_ which offers real mobile devices.
+
+There are **3 options** available:
+    
+* [BrowserStack](https://browserstack.com)
+* [Sauce Labs](https://saucelabs.com)
+* [Kobiton](https://kobiton.com)
+    
+### 1. How to use the Mobile Recorder with BrowserStack
+    
+You need an account on BrowserStack that has access to `App Automate`.
+
+If you do not have an account on BrowserStack, you can sign up for a free trial.
+
+That will give you **100 minutes** of `App Automate`.
+
+Even if your tests will be executed on BrowserStack, you will get the results and logs in your Endtest account.
+    
+#### Steps
+**Connect your Endtest account with your BrowserStack account:**
+1. Go to your [BrowserStack](https://browserstack.com) account.
+2. If you don't have a BrowserStack account, you can just sign up for a Free Trial.
+3. Go to the `Products` section from BrowserStack and click on `App Automate`.
+4. Click on the `Show` button from the `Username and Access Keys` section on the left side of the page.
+5. Go to the `Integrations` tab from the [Settings](https://app.endtest.io/settings) page in Endtest.
+6. Add the `Username` and `Access Key` in the BrowserStack App Automate modal.
+7. Click on the `Save` button.
+    
+<video
+  controls
+  className="w-full aspect-video"
+>
+  <source type="video/mp4" src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_browserstack.webm" />
+</video>
+    
+<br />
+    
+<Check> **Your Endtest account and your BrowserStack account are now connected.** </Check> 
+<Note> You won't have to repeat steps 1-7 unless you move to another BrowserStack account. </Note>
+    
+8. Upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) section.
+9. Copy the `File Download URL` for your uploaded app.
+    
+<Check> **Your app is now stored on the Endtest Drive.**  </Check>
+<Note> Steps 8-9 will be repeated only when you want to test a new version of your app. </Note>
+    
+10. Go to the [Mobile Tests](https://app.endtest.io/mobile-tests) section in Endtest.
+11. Click on the `Record Mobile Test` button and select `BrowserStack` from the `Grid` dropdown.
+12. Select the desired configuration.
+13. Paste the `File Download URL` in the `APK Download URL` / `IPA Download URL` input.
+14. Click on the `Start Recording` button.
+15. Once your app has loaded in the `Mobile Recorder`, you will be able to record steps and execute them.
+16. After you're done recording, you can save the steps into a `Mobile Test`.
+    
+<video
+  controls
+  className="w-full aspect-video"
+>
+  <source type="video/mp4" src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_record_mobile_new_audio.webm" />
+</video>
+    
+<br />
+    
+> You can also upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) by using our [Endtest API](/advanced/how-to-use-the-endtest-api) chapter.  
+> 
+> You can also upload your APK or IPA file on a server or an AWS S3 bucket.  
+> The URL must have the file name and the file extension at the end, and the file (app) must be downloaded automatically, without any prompts or confirmations.  
+> 
+> Take our APK Download URL for the Wikipedia Android App as an example:  
+> [https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk](https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk)
+> 
+> If you want to start the Mobile Recorder from a certain point, you can add a `Miscellaneous -> Start Mobile Recorder` step in your Mobile Test.
+    
+### 2. How to use the Mobile Recorder with Sauce Labs
+    
+You need an account on Sauce Labs that has access to the `Real Device Cloud` component.
+
+If you do not have an account on Sauce Labs, you can sign up for a free trial.
+
+That will give you access to a list of devices.
+
+Even if your tests will be executed on Sauce Labs, you will get the results and logs in your Endtest account.
+    
+#### Steps
+**Connect your Endtest account with your Sauce Labs account:**
+1. Go to your [Sauce Labs](https://saucelabs.com) account.
+2. If you don't have a Sauce Labs account, you can just sign up for a Free Trial.
+3. Go to the [User Settings](https://app.saucelabs.com/user-settings) section in Sauce Labs.
+4. Copy the `Username` and `Access Key`.
+5. Go to the `Integrations` tab from the [Settings](https://app.endtest.io/settings) page in Endtest.
+6. Add the `Username` and `Access Key` in the Sauce Labs modal.
+7. Click on the `Save` button.
+    
+<Check> **Your Endtest account and your Sauce Labs account are now connected.**  </Check>
+<Note> You won't have to repeat steps 1-7 unless you move to another Sauce Labs account. </Note>
+    
+8. Upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) section.
+9. Copy the `File Download URL` for your uploaded app.
+    
+<Check> **Your app is now stored on the Endtest Drive.**  </Check>
+<Note> Steps 8-9 will be repeated only when you want to test a new version of your app. </Note>
+    
+10. Go to the [Mobile Tests](https://app.endtest.io/mobile-tests) section in Endtest.
+11. Click on the `Record Mobile Test` button and select `Sauce Labs` from the `Grid` dropdown.
+12. Select the desired configuration.
+13. Paste the `File Download URL` in the `APK Download URL` / `IPA Download URL` input.
+14. Click on the `Start Recording` button.
+15. Once your app has loaded in the `Mobile Recorder`, you will be able to record steps and execute them.
+16. After you're done recording, you can save the steps into a `Mobile Test`.
+    
+> You can also upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) by using our [Endtest API](/advanced/how-to-use-the-endtest-api) chapter.  
+> 
+> You can also upload your APK or IPA file on a server or an AWS S3 bucket.  
+> The URL must have the file name and the file extension at the end, and the file (app) must be downloaded automatically, without any prompts or confirmations.  
+> 
+> Take our APK Download URL for the Wikipedia Android App as an example:  
+> [https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk](https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk)
+> 
+> If you want to start the Mobile Recorder from a certain point, you can add a `Miscellaneous -> Start Mobile Recorder` step in your Mobile Test.
+    
+### 3. How to use the Mobile Recorder with Kobiton
+    
+You need an account on Kobiton that has access to mobile devices.
+
+If you do not have an account on Kobiton, you can sign up for a free trial.
+
+Even if your tests will be executed on Kobiton, you will get the results and logs in your Endtest account.
+    
+#### Steps
+**Connect your Endtest account with your Kobiton account:**
+1. Go to your [Kobiton](https://kobiton.com) account.
+2. If you don't have a Kobiton account, you can just sign up for a Free Trial.
+3. Go to the `Profile` section in Kobiton and get your `Username`.
+4. Go to the `Settings` section in Kobiton and get your `API Key`.
+5. Go to the [Settings](https://app.endtest.io/settings) page in Endtest.
+6. Go to the `Integrations` tab.
+7. Add the `Username` and `API Key` from Kobiton.
+8. Click on the `Save` button.
+    
+<Check> **Your Endtest account and your Kobiton account are now connected.**  </Check>
+<Note> You won't have to repeat steps 1-8 unless you want to use a different Kobiton Access Key. </Note>
+    
+9. Upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) section.
+10. Copy the `File Download URL` for your uploaded app.
+    
+<Check> **Your app is now stored on the Endtest Drive.**  </Check>
+<Note> Steps 9-10 will be repeated only when you want to test a new version of your app. </Note>
+    
+11. Go to the [Mobile Tests](https://app.endtest.io/mobile-tests) section in Endtest.
+12. Click on the `Record Mobile Test` button and select `Kobiton` from the `Grid` dropdown.
+13. Select the desired configuration.
+14. Paste the `File Download URL` in the `APK Download URL` / `IPA Download URL` input.
+15. Click on the `Start Recording` button.
+16. Once your app has loaded in the `Mobile Recorder`, you will be able to record steps and execute them.
+17. After you're done recording, you can save the steps into a `Mobile Test`.
+    
+> You can also upload your APK or IPA file in the [Drive](https://app.endtest.io/drive) by using our [Endtest API](/advanced/how-to-use-the-endtest-api) chapter.  
+> 
+> You can also upload your APK or IPA file on a server or an AWS S3 bucket.  
+> The URL must have the file name and the file extension at the end, and the file (app) must be downloaded automatically, without any prompts or confirmations.  
+> 
+> Take our APK Download URL for the Wikipedia Android App as an example:  
+> [https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk](https://endtest-files.s3.us-west-2.amazonaws.com/WikipediaSample.apk)
+> 
+> If you want to start the Mobile Recorder from a certain point, you can add a `Miscellaneous -> Start Mobile Recorder` step in your Mobile Test.
+    
+## 4. Manually adding test suites, test cases, and steps
+    
+### Add a test suite
+    
+1. Go to the [Mobile Tests](https://app.endtest.io/mobile-tests) section.
+2. Click on the `Add Test Suite` button.
+3. Enter the name for the test suite.
+4. Click on the `Save Test Suite` button.
+    
+### Add a test case
+    
+Test cases can be added only after you have created the test suite.
+    
+1. Click on the `Add Test Case` button.
+2. Enter the name for the test case.
+    
+### Add steps inside the test case
+    
+A test case is made up of steps.
+    
+To add a new step, just click on the `Add Step` button.
+    
+Every step is defined by its `Action`
+    
+Some actions are tied to the entire page (actions such as `Lock`, `Hide Keyboard`, `Take Screenshot`, etc.).
+    
+While other actions must be tied to a specific element (actions such as `Single Tap`, `Flick`, `Write Text`, etc.).
+    
+To tie an `Action` to a specific `Element`, you must use a **Locator**.
+    
+A `Locator` is basically an attribute that identifies the element (`Accessibility ID`, `Class Name`, `XPath`, `Text Inside`, etc.).
+    
+For Touch actions, you can also use `Coordinates` as a Locator.
+    
+The easiest way to find a `Locator` is to use the `Get Element Inspector` option from the `Miscellaneous` action.
+    
+You can read more about that in the [Finding Elements in Mobile Applications](/mobile-tests/finding-elements-in-mobile-applications) chapter.
+    
+<video
+  controls
+  className="w-full aspect-video"
+>
+  <source type="video/mp4" src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/create_mobile_test_without_mobile_recorder.webm" />
+</video>

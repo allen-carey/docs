@@ -1,0 +1,80 @@
+---
+title: 'How to Test File Uploads'
+description: 'Learn how to perform file uploads in your tests'
+icon: 'upload'
+'og:title': 'How to Test File Uploads | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to perform file uploads in your tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'twitter:title': 'How to test File Uploads | Endtest'
+'twitter:description': 'Learn how to perform file uploads in your tests'
+---
+
+## Introduction
+
+When you manually upload a file on a site, a native window from the Operating System opens which allows you to select the file.
+
+After you select the file from that window, the local path of the file is written in the `<input type="file">` element.
+
+Since our engine is using the webdrivers to locate and interact with elements from Web Applications, our engine cannot see or interact with that native window from the Operating System.
+
+That's why our `Upload File` action writes the local path of the file directly in the `<input type="file">` element, thus skipping the native window from the Operating System.
+
+In the `Upload File` action, you need to provide the online path for your file.
+
+You can get an online path for your file by uploading it in our [Drive](https://app.endtest.io/drive) section.
+
+Our engine will download the file from that path, place it on the machine on which the test is executed, and then get the local path for that file and write it in the `<input type="file">` element.
+
+There is no need to add a `Click` step that clicks on the `Choose file` button from your Web Application, since there is no need for the native window from the Operating System to be displayed.
+
+Sometimes, the `<input type="file">` may be hidden or may not be displayed.
+
+In order for our engine to interact with that input, you might need to add an `Execute JavaScript` step to make it visible.
+
+## Steps
+
+1. Upload your file in our [Drive](https://app.endtest.io/drive) section.  
+2. Copy the File Download URL for your uploaded file.  
+3. Find the `<input type="file">` in your Web Application.  
+4. Get the locator for that element.  
+5. Add the File Download URL for your file in the `Upload File` step.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_web_tests_upload_file.webm"
+></video>
+
+<br />
+
+In order for our engine to interact with that input, you might need to add an `Execute JavaScript` step **before** step 5 in order to make it visible.
+
+The `Execute JavaScript` step must be placed before the `Upload File` step.
+
+For this example, we'll pretend that the `<input type="file">` has the `myFile` ID:
+
+```javascript
+document.querySelector("#myFile").style.visibility="visible";
+document.querySelector("#myFile").style.display="block";
+```
+
+Depending on the state of your element, you might also need to update CSS properties such as width, height, opacity, z-index, pointer-events, etc.
+
+```javascript
+document.querySelector("#myFile").style.visibility="visible";
+document.querySelector("#myFile").style.display="block";
+document.querySelector("#myFile").style.width="200px";
+document.querySelector("#myFile").style.height="20px";
+document.querySelector("#myFile").style.position="fixed";
+document.querySelector("#myFile").style.overflow="visible";
+document.querySelector("#myFile").style.zIndex="9999999";
+document.querySelector("#myFile").style.top="500px";
+document.querySelector("#myFile").style.left="500px";
+document.querySelector("#myFile").style.right="500px";
+document.querySelector("#myFile").style.bottom="500px";
+```
+
+<Note> If you still can't figure it out, just send us a message; we'll gladly help out. 
+You can also upload files in the [Drive](https://app.endtest.io/drive) by using our [Endtest API](/advanced/how-to-use-the-endtest-api). 
+More details are available in the Endtest API chapter. </Note>

@@ -1,0 +1,38 @@
+---
+title: 'How to Test PDF Files'
+description: 'Learn how to test PDF files in your Web Tests'
+icon: 'file-pdf'
+'og:title': 'How to Test PDF Files | Endtest'
+'og:description': 'Learn how to test PDF files in your Web Tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'How to test PDF files | Endtest'
+'twitter:description': 'Learn how to test PDF files in your Web Tests'
+---
+
+## Introduction
+
+In some cases, you may want access to those PDF files during your tests to check their contents.
+
+You can test PDF documents with our platform.
+
+## Solution
+
+There are 2 scenarios:
+
+1. **You have the link to the PDF file.**  
+   All you need to do is access that link with a `Go to URL` step:  
+   <img src="https://app.endtest.io/images/goToUrlPdf.png" alt="endtest pdf" height="100"/>
+
+2. **You have a button to download the PDF.**  
+   Downloading the PDF will actually open it in a new browser tab.  
+   Add a `Switch to next tab` step to change the focus to that tab.
+
+<br />
+
+In both cases, if you need to scroll down, use the `Press Key` action:  
+<img src="https://app.endtest.io/images/docScrollPdf.png" alt="endtest pdf" height="100"/>
+
+You can also jump to a certain page by appending the page number at the end of the URL of the PDF file.
+
+For example, if you want to jump to page 3, you will need to add `#page=3`.

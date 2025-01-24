@@ -1,0 +1,79 @@
+---
+title: 'Execute JavaScript'
+description: 'How to add JavaScript steps in your Web Tests'
+icon: 'js'
+'og:title': 'Execute JavaScript | Endtest'
+'og:description': 'How to add JavaScript steps in your Web Tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+'og:site_name': 'Endtest'
+'twitter:title': 'Execute JavaScript | Endtest'
+'twitter:description': 'How to add JavaScript steps in your Web Tests'
+---
+
+## Introduction
+
+There are certain scenarios where you might need to execute some JavaScript code.
+
+For example, let's say you want to generate a complex random pattern that you cannot obtain by using our `Set Variable` action and by concatenating variables and strings.
+
+You can execute JavaScript code in your **Web Tests** by using an `Execute JavaScript` step.
+
+The JavaScript variables and the Endtest variables are on different layers, but you can exchange values between them:
+
+- You can transfer a value **from** a JavaScript variable **to** an Endtest variable by using the `Extract Value from JS variable` option in the `Set Variable` action.  
+- You can transfer a value **from** an Endtest variable **to** a JavaScript variable by using the `Transfer to JavaScript` action.
+
+<Note> You can find more details about the `Set Variable` action and variable concatenation in the [Variables](/advanced/how-to-use-variables) chapter. </Note>
+
+---
+
+## Steps
+
+1. Add an `Execute JavaScript` step.  
+2. Write your JavaScript code in our JavaScript editor.  
+3. Save the test.  
+4. Execute the test.
+
+---
+
+## Mandatory Guidelines
+
+1. **Do not** use the `var`, `let`, or `const` keywords when declaring variables and constants in your JavaScript code.  
+2. **Do not** add comments in your JavaScript code.  
+3. Test your JavaScript code in your own browser console to make sure that it works as expected.  
+4. Avoid using `Execute JavaScript` to click elements or write text in inputs.  
+   - Using JavaScript to perform such actions does not mimic a real user and your web application might behave differently.  
+5. The JavaScript code is executed by the specific WebDriver for each browser.  
+   - This means it might not behave the same way in all browsers, and you might need to adapt it.  
+   - For example, if you want your code to run correctly in Firefox, you must use `window.` before each variable.  
+6. If the execution of the JavaScript throws any errors, you will see them in the output of that step.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_execute_js.mp4"
+></video>
+
+---
+
+## External JavaScript Libraries
+
+You can also import an external JavaScript library in an `Execute JavaScript` step.
+
+For example, here's how you might import the `Chance.js` library:
+
+```javascript
+s = document.createElement("script");
+s.type = "text/javascript";
+s.src = "https://chancejs.com/chance.min.js";
+document.getElementsByTagName("head")[0].appendChild(s);
+```
+And this is how you would call the `phone()` method from that library:
+
+```javascript
+phone = chance.phone();
+```
+
+<Warning> The methods from the imported JavaScript library cannot be called from the same `Execute JavaScript` step. A new `Execute JavaScript` step should be added for that. </Warning>
+
+As mentioned at the beginning of this chapter, you can transfer a value from a JavaScript variable to an Endtest variable by using a `Transfer to JavaScript` step.
