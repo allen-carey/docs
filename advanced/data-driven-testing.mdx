@@ -1,0 +1,75 @@
+---
+title: "Data-driven Testing"
+description: "Learn how to perform Data-driven Testing"
+icon: 'file-csv'
+'og:site_name': "Endtest"
+'og:title': "Data-driven Testing | Endtest"
+'og:description': "Learn how to perform Data-driven Testing"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+## Introduction
+
+The `Import Test Case Multiple Times (CSV)` action allows you to execute the same test case multiple times in a row, while extracting data from a CSV file.
+
+## Guide
+
+When you select the `Import Test Case Multiple Times (CSV)` action, the `Test case to import` dropdown gets populated with the entire list of test cases that you have access to.
+
+In order to get a `CSV File URL`, you can upload your CSV file in our <a class="endtest_link" href="https://app.endtest.io/drive">Drive</a> section.
+
+For each row of the CSV file, a new set of variables will be created.
+
+The name of the variables will be generated from the Column Headers of the CSV file, all spaces and non-alphanumeric characters will be removed and a `$` will be prepended to the name of the variable.
+
+Here are some  examples:
+
+```csv
+| Column Header in CSV file | Generated Variable Name |
+|---------------------------|-------------------------|
+| email                     | $email                  |
+| User Name                 | $UserName               |
+| The_Address               | $TheAddress             |
+| zip-code                  | $zipcode                |
+```
+
+The data from the rest of the CSV rows will not be altered in any way.
+
+Let's suppose we have the following CSV file:
+
+```csv
+| email             | password           |
+|-------------------|--------------------|
+| jimmy@example.com | ^^VT[Nv20zSwCBh4*  |
+| walter@random.com | ^]LNf]CHNQKOX(g*ld |
+| jessica@inbox.com | ba!^tBJ            |
+```
+
+We can see that the CSV file has 2 column and 4 rows.
+
+The Column Headers will be used only to name the variables.
+
+The values for those variables will be extracted from the rest of the 3 rows.
+
+If we would use this CSV file in our test with the `Import Test Case Multiple Times (CSV)` action, the imported test case would be executed 3 times, with 3 sets of variables, one set from each row.
+
+You can only import test cases from other Web Tests in a Web Test.
+
+You can only import test cases from other Mobile Tests in a Mobile Test.
+
+When the test is executed, the `Import Test Case Multiple Times (CSV)` action executes the latest version of the imported test case.
+
+The variables declared in the imported test case can be accessed from the test suite in which it gets imported.
+
+<video
+  autoPlay
+  muted
+  loop
+  controls
+  playsInline
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3.us-west-2.amazonaws.com/documentation/endtest_data_driven_testing_csv.mp4"
+></video>
+
+<br />
+
+<Tip> You can also extract data from Google Sheets by using the `Google Sheets API` and the <a class="endtest_link" href="/advanced/send-api-requests">Send API Request</a> action from Endtest. </Tip>

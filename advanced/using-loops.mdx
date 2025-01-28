@@ -1,0 +1,40 @@
+---
+title: "Using Loops"
+description: "Learn how to use Loops in your tests"
+icon: 'rotate-left'
+iconType: 'duotone'
+'og:site_name': "Endtest"
+'og:title': "Using Loops | Endtest"
+'og:description': "Learn how to use Loops in your tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+The `Import Test Case Multiple Times` action allows you to execute the same test case multiple times in a row.
+
+## Guide
+
+When you select the `Import Test Case Multiple Times` action, the `Test case to import` dropdown gets populated with the entire list of test cases that you have access to.
+
+A value for the `Number of iterations` must be provided.
+
+The number of the current iteration can be fetched during the test execution with the `$systemCurrentLoopIteration` system variable.
+
+You can only import test cases from other Web Tests in a Web Test.
+
+You can only import test cases from other Mobile Tests in a Mobile Test.
+
+When the test is executed, the `Import Test Case Multiple Times` action executes the latest version of the imported test case.
+
+The variables declared in the imported test case can be accessed from the test suite in which it gets imported.
+
+<video
+  autoPlay
+  controls
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_loops.mp4"
+></video>

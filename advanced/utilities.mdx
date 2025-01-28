@@ -1,0 +1,242 @@
+---
+title: "Utilities"
+description: "Learn how to use the Utilities service from Endtest"
+icon: 'screwdriver-wrench'
+'og:site_name': "Endtest"
+'og:title': "Utilities | Endtest"
+'og:description': "Learn how to use the Utilities service from Endtest"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+In certain scenarios, you might need to process data.
+
+For example, you might need to automatically extract a number from a text.
+
+The `Utilities` option is available in the `Miscellaneous` action.
+
+<img height="200" src="https://app.endtest.io/images/misc_utilities.png" alt="utilities" />
+
+## Steps
+
+1. Add a new step in your test.
+2. Select the `Miscellaneous` action from the `Action` dropdown.
+3. Select the `Utilities` option from the `Action Type` dropdown.
+4. Select the method that you want to use from the `Method` dropdown.
+
+## Methods
+
+You can choose from different methods:
+
+### 1. Extract Text After Pattern
+
+The `Extract Text After Pattern` method can be used to extract a substring from a string, by providing another substring as a pattern.
+
+**Query Params that you need to add in the `Send API Request` modal:**
+
+For example, let's say you have the following text:
+
+```
+1234 is your validation code
+```
+
+You can extract the `1234` portion of that text by providing the following pattern:
+
+```
+is your validation code
+```
+
+That will extract the following substring:
+
+```
+1234
+```
+
+
+### 3. Extract Numbers From Text
+
+The `Extract Numbers From Text` method can used to extract all the numbers from a string.
+
+
+For example, let's say you have the following text:
+
+```
+Your validation code is 1234. Do not share it with anyone else.
+```
+
+You can extract the `1234` portion of that text because it's entirely made up of numbers.
+
+
+### 4. Extract Value From JSON
+
+The `Extract Value From JSON` method can used to get a value from a JSON object.
+
+For example, if you have the following JSON object:
+
+```javascript
+{"firstName":"John", "lastName":"Doe"}
+```
+
+Don't forget, you can also use Endtest variables in all these methods.
+
+### 5. Extract Item From Array
+
+The `Extract Item From Array` method can used to get an item from an array.
+
+For example, if you have the following array:
+
+```javascript
+["apple", "orange", "tomato"]
+```
+
+You can chain together multiple `Utilities` steps which can use the `Extract Item From Array` and `Extract Value From JSON` methods to extract values from complex JSON objects.
+
+
+For example, you might have a complex JSON object like this:
+
+```javascript
+{
+"employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]
+}
+```
+If you want to extract the second `firstName` value from that JSON object, you have to chain together 3 `Utilities` steps:  
+
+Start by using the `Extract Value From JSON` method to get the value for the `employees` item:
+
+```javascript
+[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]
+```
+
+That value will be an array and you can use the `Extract Item From Array` to get the second item from that array.
+
+```javascript
+{"firstName":"Anna", "lastName":"Smith"}
+```
+
+That item will be a JSON object and you can once again use the `Extract Value From JSON` method to get the value for the `firstName`.
+
+
+### 6. Extract Last Item From Array
+
+The `Extract Last Item From Array` method can used to get the last item from an array.
+
+
+### 7. Get Text Length
+
+The `Get Text Length` method can used to get the character count of a text.
+
+### 8. Store Item in Vault
+
+In some scenarios, you might need to manage values across different test suites.
+
+These use cases can usually be handled by using <a class="endtest_link" href="/advanced/how-to-use-variables/">Variables</a> and <a class="endtest_link" href="/advanced/importing-test-cases/">Import Test Case</a> actions.
+
+But there are other scenarios where one test suite might update a value which is used by other test suites.
+
+You can use the `Endtest Vault` to store and fetch global values, which can be accessed from all your test suites.
+
+It works like a permanent storage.
+
+And these global values are called `items`.
+
+The `Store Item in Vault` method can be used to store an item.
+
+The `items` stored in the `Endtest Vault` can only be accessed by you and your Team.
+
+The method requires entering the <a class="endtest_link" href="/advanced/how-to-use-the-endtest-api/">Endtest API</a> credentials (`App ID` and `App Code`), which you can find in the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+
+### 9. Get Item from Vault
+
+The `Get Item from Vault` method can be used to fetch global values stored in the `Endtest Vault`.
+
+These global values are called `items`.
+
+The `items` stored in the `Endtest Vault` can only be accessed by you and your Team.
+
+The method requires entering the <a class="endtest_link" href="/advanced/how-to-use-the-endtest-api/">Endtest API</a> credentials (`App ID` and `App Code`), which you can find in the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+
+When the `item` is fetched from the `Endtest Vault`, the value of that `item` will be extracted into a variable.
+
+The value will also be displayed in the Logs of the Results page for that test execution.
+
+If you do not want the value to be displayed in the Logs, you'll need to give the `item` a name that contains one of these 2 strings: `secret` or `password` (uppercase or lowercase or mixed). That can only be done when using the `Store Item in Vault` method.
+
+
+### 10. Generate Random Name
+
+The `Generate Random Name` method can be used to generate random names.
+
+
+### 11. Extract Character from String
+
+The `Extract Character from String` method can be used to extract a certain character from a string.
+
+
+### 12. Convert Text to LowerCase
+
+The `Convert Text to LowerCase` method can be used to convert a text to LowerCase.
+
+
+### 13. Convert Text to UpperCase
+
+The `Convert Text to UpperCase` method can be used to convert a text to UpperCase.
+
+### 14. Capitalize Text
+
+The `Capitalize Text` method can be used to capitalize a text, converting the first letter of each word to a capital letter (uppercase letter) and the remaining letters to lower case.
+
+
+### 15. Send Email
+
+The `Send Email` method can be used to send an email from any `endtest-mail.io` address.
+
+This feature is not available during the free trial.
+
+>If you want to also add an attachment to the email, use the <a class="endtest_link" href="/advanced/utilities-api/#14-send-email/">Utilities API</a> instead.
+
+
+### 16. Math Calculations
+
+The `Math Calculations` method can be used to perform mathematical operations.
+
+>Supported operations: Addition, Subtraction, Multiplication, Division, Round, Round Down, Round Up.
+>
+>You can perform math operations with variables by placing the variable name between double curly brackets:
+>
+>```{{$price}};{{$tax}}```
+
+
+### 17. Remove Newline Characters
+
+The `Remove Newline Characters` method can be used to remove Newline characters.
+
+### 18. Trim String
+
+The `Trim String` method removes any leading and trailing whitespaces including tabs.
+
+### 19. Extract Random Item From List
+
+The `Extract Random Item From List` method can used to get a random item from a list.
+
+### 20. Extract Value From XML
+
+The `Extract Value From XML` method can used to get a value from an XML object.
+
+### 21. Remove Pattern from String
+
+The `Remove Pattern from String` method can used to remove a substring from a string.
+
+### 22. Get Array Length
+
+The `Get Array Length` method can used to get the number of items from an array.
+
+<Note> Don't forget, you can also use Endtest variables in all the Utilities methods. </Note>

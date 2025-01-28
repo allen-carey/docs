@@ -1,0 +1,77 @@
+---
+title: "Read SMS"
+description: "Learn how to read SMS messages automatically with Endtest"
+icon: 'comment-sms'
+'og:site_name': "Endtest"
+'og:title': "Read SMS | Endtest"
+'og:description': "Learn how to read SMS messages automatically with Endtest"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+## Introduction
+
+In certain scenarios, you might need to check the SMS messages sent by your application.
+
+For example, One-Time Passwords (OTP) are sent to a phone number using SMS (text message) in situations like two-factor authentication.
+
+You can read SMS messages automatically with Endtest, without using any other external service.
+
+This functionality is available for both Web Tests and Mobile Tests and your test does not have to be executed on a mobile device.
+
+<Note> This functionality requires real phone numbers to be assigned to your team. <br></br> We provide real phone numbers for our users. You don't have to use any external service. <br></br><br></br> If there are no real phone numbers assigned to your team, you can request one by contacting our Support Team. <br></br><br></br> This functionality is not related in any way to the phone number that you have provide for the Two-Factor Authentication (2FA) for your Endtest account. </Note>
+
+## Steps
+
+1. Make sure there is at least one phone number assigned to your team.
+2. Add a new step with the `Real Phone Number` option from the `Set Variable` action.
+3. Choose a name for that variable and add the phone number in the `Real Phone Number` input.
+
+<img height="200" src="https://app.endtest.io/images/real_phone_number_variable.png" />
+
+> All the phone numbers assigned to your team will appear in a dropdown in the `Real Phone Number` input after you start typing.
+>
+> You can also find them in the Team section from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+>
+
+4. The variable declared in the previous step can be used to enter that phone number in any input we want.
+5. Add a new step with the `Extract Latest SMS` option from the `Set Variable` action.
+6. Choose a name for that variable.
+7. Enter the name of the variable declared at step 3 in the `Real Phone Number` input.
+
+<img height="200" src="https://app.endtest.io/images/endtest_sms_step.png" />
+
+<Tip> You can also enter the phone number directly, but using variables is a good practice. </Tip>
+
+8. The text of the SMS will be available in the variable declared at step 7.
+9. You can then use that variable in any step you want, even in assertions.
+
+> After the `Extract Latest SMS` step is executed, the SMS message will be automatically marked as Read and you won't be able to access it with another `Extract Latest SMS` step.
+>
+> You can also read and delete SMS messages manually in the Team section from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+>
+
+## Extract a value from SMS
+
+In some cases, you might need to extract a certain value from a SMS.
+
+There are 2 ways in which you can achieve that:
+
+### 1. By using JavaScript
+
+If you are dealing with a `Web Test`, you can use a `Transfer to JavaScript` step in order to copy the SMS text from that Endtest variable into a JavaScript variable.
+
+After that, you can use an `Execute JavaScript` step in order to extract the exact value that you need from that SMS text stored in the JavaScript variable and store it into a separate JavaScript variable.
+
+And then you can copy that extracted value from the newly created JavaScript variable back into an Endtest variable by using the `Extract Value from JS Variable` option from the `Set Variable` action.
+
+> More details are available in the <a class="endtest_link" href="/web-tests/execute-javascript/">Execute JavaScript</a> chapter.
+>
+
+### 2. By using the Endtest Utilities service
+
+We provide an API endpoint called `Utilities` where you can send API requests during your tests in order to process data.
+
+You can call that API endpoint automatically during your test by adding a `Send API Request` step.
+
+For example, if you want to extract the OTP from a SMS message, you can use one of the following options: `extractNumbersFromText`, `extractTextBeforePattern` or `extractTextAfterPattern`
+
+> More details are available in the <a class="endtest_link" href="/advanced/utilities/">Utilities</a> chapter.

@@ -1,0 +1,113 @@
+---
+title: "Adding Collaborators"
+description: "How to add Collaborators to your tests."
+icon: 'users-medical'
+'og:site_name': "Endtest"
+'og:title': "Adding Collaborators | Endtest"
+'og:description': "How to add Collaborators to your tests."
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+Since your tests are stored in our cloud, you can easily grant access to other users or groups.
+
+Access must be granted for each test suite to each user or each group.
+
+
+## Steps
+1. Click on the `Settings` button for your test suite.
+2. Click on the `Collaborators` tab.
+3. Click on the `Add Collaborator` button.
+4. Select the User or Group to which you want to grant access.
+5. Select the Role for that User or Group.
+6. Click on the `Add` button.
+
+If you have the Owner role, you can revoke access by clicking on the `X` button next to a user.
+
+That role also allows you change the role of other users and groups in that test suite.
+
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_add_collaborator.mp4"
+></video>
+
+
+
+## Roles and Permissions
+
+| Action                                | Owner | Editor | Viewer |
+|---------------------------------------|-------|--------|--------|
+| Add Collaborator                      | ✅     | ⛔     | ⛔    |
+| Remove Collaborator                   | ✅     | ⛔     | ⛔    |
+| Change Role for Collaborator          | ✅     | ⛔     | ⛔    |
+| Delete test suite                     | ✅     | ⛔     | ⛔    |
+| Transfer test suite                   | ✅     | ⛔     | ⛔    |
+| Rename test suite                     | ✅     | ✅     | ⛔    |
+| Change Settings for test suite        | ✅     | ✅     | ⛔    |
+| Execute test suite                    | ✅     | ✅     | ✅    |
+| Create backup for test suite          | ✅     | ✅     | ✅    |
+| Duplicate test suite                  | ✅     | ✅     | ✅    |
+| Create new test case                  | ✅     | ✅     | ⛔    |
+| Rename test case                      | ✅     | ✅     | ⛔    |
+| Duplicate test case                   | ✅     | ✅     | ⛔    |
+| Delete test case                      | ✅     | ✅     | ⛔    |
+| Reposition test case                  | ✅     | ✅     | ⛔    |
+| Transfer test case                    | ✅     | ✅     | ⛔    |
+| Schedule test execution               | ✅     | ✅     | ✅    |
+| Update scheduled test execution       | ✅     | ✅     | ✅    |
+| Duplicate scheduled test execution    | ✅     | ✅     | ✅    |
+| Delete scheduled test execution       | ✅     | ✅     | ✅    |
+| Delete backup                         | ✅     | ✅     | ✅    |
+| Restore backup                        | ✅     | ✅     | ✅    |
+| Export test suite                     | ✅     | ✅     | ✅    |
+| View test execution results           | ✅     | ✅     | ✅    |
+| Stop test execution                   | ✅     | ✅     | ✅    |
+| Delete test execution results         | ✅     | ✅     | ✅    |
+| Start test execution with Endtest API | ✅     | ✅     | ✅    |
+| Stop test execution with Endtest API  | ✅     | ✅     | ✅    |
+| Fetch results with Endtest API        | ✅     | ✅     | ✅    |
+
+## Collaborators FAQ
+
+#### 1. Why is the `Users` dropdown empty?
+
+The `Users` dropdown is populated with the users from your `Team`.
+
+If the `Users` dropdown is empty, it either means that you do not have other users in your team or every user in your team has already been added as a Collaborator.
+
+#### 2. How do I add `users` in my team?
+
+If you are a Team Admin, you can add users in your in the Team section from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+
+More details about adding users in your team are available in the <a class="endtest_link" href="https://app.endtest.io/guides/docs/team/">Team</a> chapter.
+
+#### 3. Why is the `Groups` dropdown empty?
+
+The `Groups` dropdown is populated with the groups from your `Team`.
+
+If the `Groups` dropdown is empty, it either means that you do not have groups in your team or every group in your team has already been added as a Collaborator.
+
+#### 4. How do I add `groups`?
+
+If you are a Team Admin, you can create groups in the Team section from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+
+More details about creating groups in your team are available in the <a class="endtest_link" href="https://app.endtest.io/guides/docs/team/">Team</a> chapter.
+
+#### 5. What happens if a `user` is added as a `Viewer` but that `user` is also part of a `group` which is added as an `Owner` or `Editor`?
+
+In all situations where a `user` has access to a test through different roles, the highest role will override the other roles.
+
+In this case, the `user` will have `Owner` permissions, since the `user` is part of a group which is added with the `Owner` role.
+
+#### 6. Can I remove myself or my `group` from the `Collaborators` list for a test suite?
+
+No, you cannot remove yourself from the `Collaborators` list, even if you have the `Owner` role.
+
+The only solution in this situation is to be removed by another `Owner`.
+
+If you are part of a `group`, you cannot remove that `group` from the `Collaborators` list.

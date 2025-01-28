@@ -1,0 +1,43 @@
+---
+title: "How to Stop a Test"
+description: "Learn how to stop a test"
+icon: 'circle-stop'
+'og:site_name': "Endtest"
+'og:title': "How to Stop a Test | Endtest"
+'og:description': "Learn how to stop a test"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+There are scenarios where you might need to stop a test execution.
+
+There are 3 ways to do that.
+
+### 1. From the Results page
+
+The easiest option is to click on the `Stop Test` button from the Results page.
+
+Deleting a test execution which is in progress will also stop it.
+
+### 2. From inside the test
+
+You can add a `Stop Test` step directly in your test.
+
+The `Stop Test` option is inside the `Miscellaneous` action.
+
+A good practice is to add that step inside an `If Statement`.
+
+For example, if you want to automatically stop a test at a certain point if you have more than 3 failed assertions, you can use a `Variable Condition` in your `If Statement` and check if the system variable `$systemFailedCounter` is greater than 3.
+
+<Note> You can find more details about system variables in the <a class="endtest_link" href="/advanced/how-to-use-variables/">Variables</a> chapter. </Note>
+
+### 3. With the Endtest API
+
+You can stop a test execution with the Endtest API by using the `stopTest` action.
+
+The unique hash for that test execution must also be provided.
+
+<Note> More details are available in the <a class="endtest_link" href="/advanced/docs/how-to-use-the-endtest-api/">Endtest API</a> chapter. </Note>
+
+<br />

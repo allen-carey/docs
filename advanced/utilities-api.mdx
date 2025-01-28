@@ -1,0 +1,704 @@
+---
+title: "Utilities API"
+description: "Learn how to use the Utilities API service from Endtest"
+icon: 'link'
+'og:site_name': "Endtest"
+'og:title': "Utilities API | Endtest"
+'og:description': "Learn how to use the Utilities API service from Endtest"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+We provide an API endpoint called `Utilities` where you can send API requests during your tests in order to process data.
+
+<Note> It's easier to use the standard <a class="endtest_link" href="/advanced/utilities/">Utilities</a>, which is an option available in the `Miscellaneous` action, instead of the Utilities API. </Note>
+
+## Steps
+
+1. Add a `Send API Request` step in your test.
+2. Select the `GET` option from the list of request types.
+3. Add the following URL in the `Enter request URL` input: `https://app.endtest.io/utilities`
+4. In the `Params` section, add the `action` that you need together with the rest of Quary Params.
+5. The `action` and the rest of the Query Params need to be added in the standard key-value format.
+6. You can also add Endtest variables in the `Params` section, simply typing `$` in one of the inputs will show you a dropdown with all the available Endtest variables.
+7. You can choose to save the response of that API request into a new Endtest variable.
+8. Go to the `Response` section, in the `Body` subsection.
+9. Choose the `Store in variable` option from the `Action` dropdown from the the `Body` subsection.
+10. Add the name of the variable that will contain the body of the response.
+
+## Actions
+
+You can choose from different actions:
+
+### 1. Extract Text After Pattern
+
+The `extractTextAfterPattern` action can be used to extract a substring from a string, by providing another substring as a pattern.
+
+**Query Params that you need to add in the `Send API Request` modal:**
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractTextAfterPattern                         |
+| text    | the full text or the name of the variable       |
+| pattern | the pattern of text or the name of the variable |
+
+For example, let's say you have the following text:
+
+```
+Your validation code is 1234
+```
+
+You can extract the `1234` portion of that text by providing the following pattern:
+
+```
+Your validation code is
+```
+
+That will extract the following substring:
+
+```
+1234
+```
+
+
+
+<img src="https://app.endtest.io/images/endtest_utilities_extract_text_after_pattern.png" alt="endtest utiliites" height="450"/>
+
+
+### 2. Extract Text Before Pattern
+
+The `extractTextBeforePattern` action can be used to extract a substring from a string, by providing another substring as a pattern.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractTextBeforePattern                        |
+| text    | the full text or the name of the variable       |
+| pattern | the pattern of text or the name of the variable |
+
+For example, let's say you have the following text:
+
+```
+1234 is your validation code
+```
+
+You can extract the `1234` portion of that text by providing the following pattern:
+
+```
+is your validation code
+```
+
+That will extract the following substring:
+
+```
+1234
+```
+
+<img src="https://app.endtest.io/images/endtest_utilities_extract_text_before_pattern.png" alt="endtest utiliites" height="450"/>
+
+
+### 3. Extract Numbers From Text
+
+The `extractNumbersFromText` action can used to extract all the numbers from a string.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractNumbersFromText                          |
+| text    | the full text or the name of the variable       |
+
+
+For example, let's say you have the following text:
+
+```
+Your validation code is 1234. Do not share it with anyone else.
+```
+
+You can extract the `1234` portion of that text because it's entirely made up of numbers.
+
+
+### 4. Extract Value From JSON
+
+The `extractValueFromJSON` action can used to get a value from a JSON object.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractValueFromJSON                            |
+| json    | the JSON object                                 |
+| name    | the name for which you will get the value       |
+
+For example, if you have the following JSON object:
+
+```javascript
+{"firstName":"John", "lastName":"Doe"}
+```
+
+This is how the `Send API Request` modal would look like if you want to extract the `firstName` value:
+
+<img src="https://app.endtest.io/images/extractValueFromJSON.png" alt="endtest utilities extract json" height="450"/>
+
+<Tip> Don't forget, you can also use Endtest variables in the `Send API Request` modal. </Tip>
+
+### 5. Extract Item From Array
+
+The `extractItemFromArray` action can used to get an item from an array.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractItemFromArray                            |
+| array   | the array from which you will extract the items |
+| index   | the location of the item from the array (the first array index is 0) |
+
+For example, if you have the following array:
+
+```javascript
+["apple", "orange", "tomato"]
+```
+
+This is how the `Send API Request` modal would look like if you want to extract the second item:
+
+<img src="https://app.endtest.io/images/extractItemFromArray.png" alt="endtest utilities extract item array" height="450"/>
+
+Since you can use Endtest variables in the  `Params`, `Authorization` and `Headers` sections and you can also store the responses in Endtest variables, you can chain together multiple `Send API Request` steps which can use the `extractItemFromArray` and `extractValueFromJSON` actions to extract values from complex JSON objects.
+
+In each `Send API Request`step, go to the `Body` section from the `Response` tab and select the option to store the value inside an Endtest variable, which will be used in the next step.
+
+
+For example, you might have a complex JSON object like this:
+
+```javascript
+{
+"employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]
+}
+```
+If you want to extract the second `firstName` value from that JSON object, you have to chain together 3 `Send API Request` steps:  
+
+Start by using the `extractValueFromJSON` action to get the value for the `employees` item:
+
+```javascript
+[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+]
+```
+
+That value will be an array and you can use the `extractItemFromArray` to get the second item from that array.
+
+```javascript
+{"firstName":"Anna", "lastName":"Smith"}
+```
+
+That item will be a JSON object and you can once again use the `extractValueFromJSON` action to get the value for the `firstName`.
+
+
+### 6. Extract Last Item From Array
+
+The `extractLastItemFromArray` action can used to get the last item from an array.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractLastItemFromArray                        |
+| array   | the array from which you will extract the item  |
+
+For example, if you have the following array:
+
+```javascript
+["apple", "orange", "tomato"]
+```
+
+This is how the `Send API Request` modal would look like if you want to extract the last item:
+
+<img src="https://app.endtest.io/images/extractLastItemFromArray.png" alt="endtest utilities extract last item array" height="450"/>
+
+### 7. Get Text Length
+
+The `getTextLength` action can used to get the character count of a text.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | getTextLength                                   |
+| text    | the full text or the name of the variable       |
+
+
+### 8. Store Item in Vault
+
+In some scenarios, you might need to manage values across different test suites.
+
+These use cases can usually be handled by using <a class="endtest_link" href="/advanced/how-to-use-variables/">Variables</a> and <a class="endtest_link" href="/advanced/importing-test-cases/">Import Test Case</a> actions.
+
+But there are other scenarios where one test suite might update a value which is used by other test suites.
+
+You can use the `Endtest Vault` to store and fetch global values, which can be accessed from all your test suites.
+
+These global values are called `items`.
+
+The `storeItemInVault` action can be used to store an item.
+
+The `items` stored in the `Endtest Vault` can only be accessed by you and your Team.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | storeItemInVault                                |
+| itemName | the name of the item                            |
+| itemValue| the value of the item                           |
+| appId    | the appId for your Endtest account                      |
+| appCode  | the appCode for your Endtest account                    |
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/endtest_store_item_in_vault_1.png" alt="endtest store item vault" height="450"/>
+
+You can also use <a class="endtest_link" href="/advanced/how-to-use-variables/">Variables</a>:
+
+<img src="https://app.endtest.io/images/endtest_store_item_in_vault_2.png" alt="endtest store item vault" height="450"/>
+
+After clicking on the `Send` button, you will see the 'done' message in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/endtest_store_item_in_vault_3.png" alt="endtest store item vault" height="450"/>
+
+
+### 9. Get Item from Vault
+
+The `getItemFromVault` action can be used to fetch global values stored in the `Endtest Vault`.
+
+These global values are called `items`.
+
+The `items` stored in the `Endtest Vault` can only be accessed by you and your Team.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | getItemFromVault                                |
+| itemName | the name of the item                            |
+| appId    | the appId for your Endtest account                      |
+| appCode  | the appCode for your Endtest account                    |
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/endtest_get_item_from_vault_1.png" alt="endtest get item vault" height="450"/>
+
+After clicking on the `Send` button, you will see the value of the `item` in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/endtest_get_item_from_vault_2.png" alt="endtest get item vault" height="450"/>
+
+That value can be stored in an Endtest variable and used in your test suite:
+
+<img src="https://app.endtest.io/images/endtest_get_item_from_vault_3.png" alt="endtest get item vault" height="450"/>
+
+
+### 10. Generate Random Name
+
+The `generateRandomName` action can be used to generate random names.
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | generateRandomName                              |
+| type     | first, last or full                             |
+| gender   | female or male                                  |
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/generateRandomNameApiRequest1.png" alt="endtest generate random name" height="450"/>
+
+After clicking on the `Send` button, you will see the value of the name in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/generateRandomNameApiRequest2.png" alt="endtest generate random name response" height="450"/>
+
+That value can be stored in an Endtest variable and used in your test suite:
+
+<img src="https://app.endtest.io/images/generateRandomNameApiRequest3.png" alt="endtest get item vault" height="450"/>
+
+
+### 11. Extract Character from String
+
+The `extractCharacterFromString` action can be used to extract a certain character from a string.
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | extractCharacterFromString                      |
+| string   | the full text or the name of the variable       |
+| index    | the location of the character from the string (the first index is 0)            |
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/extractCharacterFromString1.png" alt="get character from text" height="450"/>
+
+After clicking on the `Send` button, you will see the character in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/extractCharacterFromString2.png" alt="endtest response of character" height="450"/>
+
+That value can be stored in an Endtest variable and used in your test suite:
+
+<img src="https://app.endtest.io/images/extractCharacterFromString3.png" alt="endtest extract character" height="450"/>
+
+
+### 12. Convert Text to LowerCase
+
+The `toLowerCase` action can be used to convert a text to LowerCase.
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | toLowerCase                                     |
+| text     | the full text or the name of the variable       |
+
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/toLowerCase1.png" alt="convert to lower case" height="450"/>
+
+After clicking on the `Send` button, you will see the converted text in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/toLowerCase2.png" alt="convert to lower case result" height="450"/>
+
+That converted text can be stored in an Endtest variable and used in your test suite:
+
+<img src="https://app.endtest.io/images/toLowerCase3.png" alt="convert to lower case variable" height="450"/>
+
+### 13. Convert Text to UpperCase
+
+The `toUpperCase` action can be used to convert a text to UpperCase.
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | toUpperCase                                     |
+| text     | the full text or the name of the variable       |
+
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/toUpperCase1.png" alt="convert to upper case" height="450"/>
+
+After clicking on the `Send` button, you will see the converted text in the `Body` subsection of the `Response` section if the request was successful:
+
+<img src="https://app.endtest.io/images/toUpperCase2.png" alt="convert to upper case result" height="450"/>
+
+That converted text can be stored in an Endtest variable and used in your test suite:
+
+<img src="https://app.endtest.io/images/toUpperCase3.png" alt="convert to upper case variable" height="450"/>
+
+### 14. Capitalize Text
+
+The `capitalizeText` action can be used to capitalize a text, converting the first letter of each word to a capital letter (uppercase letter) and the remaining letters to lower case.
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | capitalizeText                                  |
+| text     | the full text or the name of the variable       |
+
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/capitalizeText.jpg" alt="capitalize text" height="450"/>
+
+After clicking on the `Send` button, you will see the converted text in the `Body` subsection of the `Response` section if the request was successful.
+
+That converted text can be stored in an Endtest variable and used in your test suite.
+
+
+
+### 15. Send Email
+
+The `sendEmail` action can be used to send an email from any `endtest-mail.io` address.
+
+This feature is not available during the free trial.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | sendEmail                                       |
+| from     | Email address of sender                         |
+| to       | Email address of recipient                      |
+| subject  | The subject of the email                        |
+| body     | The body of the email                           |
+| attachment  | The File Download Link from the Endtest Drive (optional)     |
+| appId    | the appId for your Endtest account                      |
+| appCode  | the appCode for your Endtest account                    |
+
+<img src="https://app.endtest.io/images/utilities_send_email.png" alt="send email" height="450"/>
+
+### 16. Send Slack Message
+
+The `sendSlackMessage` action can be used to send a message to a Slack Channel.
+
+This feature is not available during the free trial.
+
+And it works only if you connected that Slack Channel to Endtest (details about that <a class="endtest_link" href="/integrations/slack/">here</a>).
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | sendSlackMessage                                |
+| channel  | the name of the Slack channel                   |
+| message  | the message you want to send                    |
+| appId    | the appId for your Endtest account              |
+| appCode  | the appCode for your Endtest account            |
+
+<img src="https://app.endtest.io/images/endtest_utilities_send_slack_message_1.jpg" alt="send slack message" height="450"/>
+
+### 17. Math Calculations
+
+The `math` action can be used to perform mathematical operations.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | math                                            |
+| operation | the arithmetical operation                     |
+| items     | a list of numbers, separated by ;              |
+
+<img src="https://app.endtest.io/images/endtest_utilities_math.png" alt="endtest math operations" height="450"/>
+
+>Supported parameters for operation: addition, subtraction, multiplication, division, round, rounddown, roundup.
+>
+>You can perform math operations with variables by placing the variable name between double curly brackets:
+>
+>```{{$price}};{{$tax}}```
+
+
+### 18. Remove Newline Characters
+
+The `removeNewLines` action can be used to remove Newline characters.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | removeNewLines                                            |
+| text | the text from which the Newline characters will be removed    |
+
+<img src="https://app.endtest.io/images/endtest_utilities_remove_new_lines.png" alt="endtest remove newline" height="450"/>
+
+### 19. Extract Random Item From List
+
+The `extractRandomItemFromList` action can used to get a random item from a list.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractRandomItemFromList                        |
+| list   | the list from which you will extract the item  |
+
+For example, if you have the following array:
+
+```javascript
+orange; apple; tomato
+```
+
+This is how the `Send API Request` modal would look like if you want to extract the last item:
+
+<img src="https://app.endtest.io/images/utilities_extractRandomItemFromList.jpg" alt="endtest utilities extract random item from list" height="450"/>
+
+
+### 20. Extract Value From XML
+
+The `extractValueFromXML` action can used to get a value from an XML object.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | extractValueFromXML                            |
+| xml    | the XML object                                 |
+| name    | the name for which you will get the value       |
+
+For example, if you have the following XML object:
+
+```xml
+<Response>
+<CountryCode>US</CountryCode>
+<CountryName>United States</CountryName>
+<RegionCode>CA</RegionCode>
+<RegionName>California</RegionName>
+<City>Mountain View</City>
+<ZipCode>94043</ZipCode>
+<Latitude>37.4192</Latitude>
+<Longitude>-122.0574</Longitude>
+<MetroCode>807</MetroCode>
+<AreaCode>650</AreaCode>
+</Response>
+```
+
+This is how the `Send API Request` modal would look like if you want to extract the `City` value:
+
+<img src="https://app.endtest.io/images/utilities_api_extract_from_xml.jpg" alt="endtest utilities extract xml" height="450"/>
+
+<Tip> Don't forget, you can also use Endtest variables in the `Send API Request` modal. </Tip>
+
+### 21. Truncate Text
+
+The `truncateText` action can be used to extract a substring from a string, by providing the number of characters you want to extract.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | truncateText                        |
+| text    | the full text or the name of the variable       |
+| count | the number of characters or the name of the variable |
+
+For example, let's say you have the following text:
+
+```
+Hello world!
+```
+
+You can extract the `Hello` portion of that text by providing the following `count`:
+
+```
+5
+```
+
+That will extract the following substring:
+
+```
+Hello
+```
+
+<img src="https://app.endtest.io/images/endtest_documentation_utilities_api_truncate.png" alt="endtest utiliites truncate text" height="450"/>
+
+
+### 22. Generate File
+
+The `generateFile` action can be used to generate a file, by providing the content and the name.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | generateFile                        |
+| fileName    | the name of the file (needs to include the extension)      |
+| content | the content that will be placed inside the file |
+
+For example, let's say you have the following `content`:
+
+```
+Hello
+```
+
+And you want to save it in a file called `sample.txt`:
+
+
+That will generate a text file with the name `sample.txt` that contains the text `Hello`.
+
+The file will be automatically stored on our side and the Response Body from that request will contain the online link to that file.
+
+<img src="https://app.endtest.io/images/endtest_documentation_utilities_generate_file.png" alt="endtest utiliites generate file" height="450"/>
+
+### 23. Extract Latest SMS
+
+The `extractLatestSMS` action can be used to fetch the latest SMS from a Phone Number assigned to your team.
+
+<Note> This functionality requires real phone numbers to be assigned to your team. <br /> <br /> We provide real phone numbers for our users. You don't have to use any external service. <br /> <br /> If there are no real phone numbers assigned to your team, you can request one by contacting our Support Team. <br /> <br /> This functionality is not related in any way to the phone number that you have provide for the Two-Factor Authentication (2FA) for your Endtest account. </Note>
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | extractLatestSMS                                |
+| number  | the phone number                 |
+| appId    | the appId for your Endtest account                      |
+| appCode  | the appCode for your Endtest account                    |
+| markAsRead  | true or false                   |
+| delete  | true or false                    |
+
+This is how the `Send API Request` modal would look like:
+
+<img src="https://app.endtest.io/images/endtest_documentation_utilities_sms.png" alt="endtest extract latest sms utilities" height="450"/>
+
+If everything is correct, the response will contain this JSON:
+
+```javascript
+{
+    "from_number": "The phone number that sent the SMS message",
+    "to_number": "The phone number that received the SMS message",
+    "body": "The body of the SMS message",
+    "timestamp": "The UTC timestamp, e.g., 2023-08-29 17:27:57"
+}
+```
+
+>After the request is sent, the SMS message will be automatically marked as Read if the `markAsRead` parameter is set to `true`.
+>That means you won't be able to access it with another request or `Extract Latest SMS` step.
+>
+>If the `delete` parameter is set to `true`, the SMS will also be deleted.
+>You can also read and delete SMS messages manually in the Team section from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page.
+
+An easier approach to extract the latest SMS is by using the `Extract Latest SMS` method from the Set Variable action, as described in the <a class="endtest_link" href="/advanced/read-sms/">Read SMS</a> chapter.
+
+### 24. Remove All Spaces
+
+The `removeAllSpaces` action can be used to remove all the spaces from a text.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key      | Value                                           |
+|----------|-------------------------------------------------|
+| action   | removeAllSpaces                                            |
+| text | the text from which the spaces will be removed    |
+
+<img src="https://app.endtest.io/images/endtest_utilities_remove_all_spaces.jpg" alt="endtest remove all spaces" height="450"/>
+
+### 25. Remove Pattern from Text
+
+The `removePatternFromText` action can be used to remove a substring from a string.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | removePatternFromText                           |
+| text    | the full text or the name of the variable       |
+| pattern | the pattern of text that you want to remove     |
+
+For example, let's say you have the following text:
+
+```
+57EUR
+```
+
+You can remove the `EUR` portion from that text by providing the following pattern:
+
+```
+EUR
+```
+
+The result will be the remaining text:
+
+```
+57
+```
+
+<img src="https://app.endtest.io/images/endtest_utilities_remove_pattern_from_text.png" alt="endtest utiliites" height="450"/>
+
+### 26. Get Array Length
+
+The `getArrayLength` action can used to get the number of items from an array.
+
+Query Params that you need to add in the `Send API Request` modal:
+
+| Key     | Value                                           |
+|---------|-------------------------------------------------|
+| action  | getArrayLength                                   |
+| array   | the array where you want to count the items |

@@ -1,0 +1,174 @@
+---
+title: Variables
+description: Learn how to use variables
+icon: 'square-root-variable'
+'og:title': 'Variables | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to use variables'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+
+## Introduction
+
+It's considered a best practice to use variables in your tests.
+
+This helps you avoid situations where you need to update the same value in multiple places.
+
+## Declaring variables
+
+You can use the `Set Variable` action to declare a new variable.
+
+The options from the `Set Variable` action allow you to enter, extract or even generate values.
+
+All variable names must start with the `$` character.
+
+Once declared, a variable can be used across the entire test suite.
+
+If you want to use it in other test suites, you have to import the test case in which the variable was declared.
+
+### Variable Types for Web Tests
+
+| Variable Type                             | Description                                                              |
+|-------------------------------------------|--------------------------------------------------------------------------|
+| Set Value                                 | Set a hardcoded value.                                                   |
+| Set Password                              | Set a hardcoded masked value.                                            |
+| Set Secret                                | Set a hardcoded masked value, protected by an extra layer of encryption. |
+| Random Number                             | Generate a random number.                                                |
+| Random String                             | Generate a random string.                                                |
+| Random Email                              | Generate a random email address.                                         |
+| Real Phone Number                         | Select one of the real phone numbers for testing assigned to your Team.  |
+| Timestamp                                 | Generate a timestamp.                                                    |
+| UUID (Universally Unique Identifier)      |  Generate a 128-bit universally unique identifier (UUID) |
+| Generate OTP from Secret Key              |  Generate the OTP from a Secret Key, just like an Authenticator app.     |
+| Extract Value from Element                | Extract the text from an element.                                        |
+| Extract Value from Element with OCR       | Extract the text from an element by using Optical Character Recognition. |
+| Extract Attribute from Element            | Extract the value of an attribute from an element.                       |
+| Extract CSS Property from Element         | Extract the value of a CSS Property from an element.                     |
+| Extract Value from JavaScript Variable    | Extract the value from a JavaScript variable.                            |
+| Extract Value from Alert                  | Extract the text from an Alert box.                                      |
+| Extract CSS Selector from Focused Element | Extract the CSS Selector from a focused element.                         |
+| Extract Result from SQL Query             | Extract the results from a SQL query.                                    |
+| Extract Latest SMS                        | Extract the latest SMS sent to a real phone number.                      |
+| Extract Current URL                       | Extract the URL from the current page.                                   |
+| Extract Current Title                     | Extract the title from the current page.                                 |
+| Extract Number of Child Elements          | Extract the number of direct child elements from a parent element.       |
+| Extract Number of Elements                | Extract the number of elements by providing a locator.                   |
+| Extract Name of Most Recent Downloaded File | Extracts the name of the last downloaded file.                          |
+| Extract Size of Most Recent Downloaded File | Extracts the size (bytes) of the last downloaded file.                   |
+| Extract MIME Type of Most Recent Downloaded File | Extracts the MIME Type (case-sensitive) of the last downloaded file. |
+| Link to Most Recent Downloaded File        | Returns a download link to the last downloaded file.                     |
+
+### Variable Types for Mobile Tests
+
+| Variable Type                       | Description                                                              |
+|-------------------------------------|--------------------------------------------------------------------------|
+| Set Value                           | Set a hardcoded value.                                                   |
+| Set Password                        | Set a hardcoded masked value.                                            |
+| Set Secret                          | Set a hardcoded masked value, protected by an extra layer of encryption. |
+| Random Number                       | Generate a random number.                                                |
+| Random String                       | Generate a random string.                                                |
+| Random Email                        | Generate a random email address.                                         |
+| Real Phone Number                   | Select one of the real phone numbers for testing assigned to your Team.  |
+| Timestamp                           | Generate a timestamp.                                                    |
+| UUID (Universally Unique Identifier)  |  Generate a 128-bit universally unique identifier (UUID) |
+| Generate OTP from Secret Key        |  Generate the OTP from a Secret Key, just like an Authenticator app.     |
+| Extract Value from Element          | Extract the text from an element.                                        |
+| Extract Value from Element with OCR | Extract the text from an element by using Optical Character Recognition. |
+| Extract Attribute from Element      | Extract the value of an attribute from an element.                       |
+| Extract Coordinates from Element    | Extract the coordinates of an element.                                   |
+| Extract Width from Element          | Extract the width of an element.                                         |
+| Extract Height from Element         | Extract the height of an element.                                        |
+| Extract Result from SQL Query       | Extract the results from a SQL query.                                    |
+| Extract Latest SMS                  | Extract the latest SMS sent to a real phone number.                      |
+| Extract WebView Context Name        | Extract the name of the WebView context (for Hybrid Mobile Apps).        |
+| Extract Number of Child Elements    | Extract the number of direct child elements from a parent element.       |
+| Extract Number of Elements          | Extract the number of elements by providing a locator.                   |
+| Extract Value from Cookie (Web Context) | Extract a cookie from the WebView context (for Hybrid Mobile Apps). |
+| Extract XPath of Lowest Element      | Extract the XPath of the lowest element on the screen.                   |
+| Extract XPath of Highest Element     | Extract the XPath of the highest element on the screen.                  |
+
+<Note> The Variable Types which involve randomness have mandatory inputs for rules which control that randomness. For example, the `Random Number` option requires users to declare a value for the `Length of Number`. And the `Random Email` option requires users to declare a value for the `Email Domain`. </Note>
+
+<Note> The `Real Phone Number` and `Extract Latest SMS` options require your account to be associated with real phone numbers. We provide real phone numbers for our users. You don't have to use any external service. If there are no real phone numbers associated with your account, please contact our Support Team. More information is available in the [Read SMS](/advanced/read-sms) chapter. </Note>
+
+You can also declare variables directly in the Endtest API request for starting a test execution, more details are available in the [Endtest API](/advanced/how-to-use-the-endtest-api) chapter.
+
+## Using variables
+
+After you set a variable, you can use it in other steps or cases by simply entering its name in any input.
+
+Simply typing `$` inside an input will display a dropdown with the available variables.
+
+You can concatenate variables with strings or with other variables by placing the variable name between double curly brackets: <br/>
+`My name is {{$username}} and my email is {{$email}}`
+
+You can also print the variables in the Results by using the `Variable` or `All Variables` options from the `Print in Results` action.
+
+## System variables
+
+System variables are automatically created in each test execution.
+
+They can be used in `If Statements` or other steps.
+
+### System variables for Web Tests
+
+| System Variable Name        | Description                                                  |
+|-----------------------------|--------------------------------------------------------------|
+| $systemType                 | Desktop or Mobile                                            |
+| $systemPlatform             | Windows, Mac, Android or iOS                                 |
+| $systemBrowser              | Chrome, Firefox, Internet Explorer 11, Edge or Safari        |
+| $systemGeolocation          | The selected Geolocation                                     |
+| $systemResolution           | The selected Screen Resolution                               |
+| $systemResolutionWidth      | The width of the selected Screen Resolution                  |
+| $systemResolutionHeight     | The height of the selected Screen Resolution                 |
+| $systemYear                 | The current year                                             |
+| $systemMonth                | The current month (e.g. 1, 2, 3)                             |
+| $systemMonthName            | The current month name (e.g. January, February, March)       |
+| $systemMonthShortName       | The current month short name (e.g. Jan, Feb, Mar)            |
+| $systemDate                 | The current date (e.g. 1, 2, 3)                              |
+| $systemDay                  | The current day (e.g. Monday, Tuesday, Wednesday)            |
+| $systemTestExecutionHash    | The hash of the current test execution                       |
+| $systemCurrentLoopIteration | The current loop for an Import Test Case Multiple Times step |
+| $systemLatestScreenshotLink | The URL for the latest screenshot                            |
+| $systemLatestWebCrawlerLinkCount | The number of links found in the latest Start Web Crawler step |
+| $systemErrorCounter         | The current number of Errors                                 |
+| $systemPassedCounter        | The current number of Passed Assertions                      |
+| $systemFailedCounter        | The current number of Failed Assertions                      |
+| $systemTestCaseName         | The name of the current test case                            |
+| $systemUserEmail            | The email of the user who started the test execution         |
+| $systemNotes                | The text provided in the Additional Notes input               |
+
+### System variables for Mobile Tests
+
+| System Variable Name        | Description                                                  |
+|-----------------------------|--------------------------------------------------------------|
+| $systemPlatform             | Android or iOS                                               |
+| $systemDevice               | The name of the device                                       |
+| $systemAppDownloadUrl       | The online path for the APK or IPA file                      |
+| $systemWidth                | The width of the device screen                               |
+| $systemHeight               | The height of the device screen                              |
+| $systemYear                 | The current year                                             |
+| $systemMonth                | The current month (e.g. 1, 2, 3)                             |
+| $systemMonthName            | The current month name (e.g. January, February, March)       |
+| $systemMonthShortName       | The current month short name (e.g. Jan, Feb, Mar)            |
+| $systemDate                 | The current date (e.g. 1, 2, 3)                              |
+| $systemDay                  | The current day (e.g. Monday, Tuesday, Wednesday)            |
+| $systemTestExecutionHash    | The hash of the current test execution                       |
+| $systemCurrentLoopIteration | The current loop for an Import Test Case Multiple Times step |
+| $systemLatestScreenshotLink | The URL for the latest screenshot                            |
+| $systemErrorCounter         | The current number of Errors                                 |
+| $systemPassedCounter        | The current number of Passed Assertions                      |
+| $systemFailedCounter        | The current number of Failed Assertions                      |
+| $systemTestCaseName         | The name of the current test case                            |
+| $systemUserEmail            | The email of the user who started the test execution         |
+| $systemNotes                | The text provided in the Additional Notes input               |
+
+## Transfer variables to JavaScript
+
+You can even transfer a variable to JavaScript, by using the `Transfer to JavaScript` action.
+
+After that, you can perform different operations with that variable in JavaScript with an `Execute JavaScript` step.
+
+If you want to transfer a variable from JavaScript, you need to use the `Extract value from JavaScript Variable` option from the `Set Variable` action.
+
+<Note> You can find more details about the `Execute JavaScript` action in the [Execute JavaScript](/web-tests/execute-javascript) chapter. </Note>

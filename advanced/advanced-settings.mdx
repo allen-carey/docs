@@ -1,0 +1,240 @@
+---
+title: "Advanced Settings"
+description: "Managing Automatic Backups for your tests"
+icon: 'gear'
+'og:site_name': "Endtest"
+'og:title': "Advanced Settings | Endtest"
+'og:description': "Managing Automatic Backups for your tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+You can configure the Advanced Settings for each test suite individually.
+
+The following options can be configured:
+1. Screenshot Tolerance (%)
+2. Screenshot Fuzz (%)
+3. Page Load Timeout (s)
+4. Element Load Timeout (s)
+5. Automatic Timestamps
+6. Automatic Screenshots
+7. Error Handling
+8. Failed Assertion
+9. Machine Learning
+10. Self-Healing
+11. Video Recording
+12. Live Video
+13. Edit Mode
+14. Add Chrome Extension
+15. Auto Grant Permissions
+16. Alert Handling
+17. Appium Version
+18. Geolocation
+19. Drag and Drop
+20. Proxy IP
+21. No Reset
+22. Max Number of Errors
+23. App Settings JSON
+24. Show Step Names
+
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_advanced_settings.mp4"
+></video>
+
+<br />
+
+## 1. Screenshot Tolerance (%)
+
+This option is used to set the accuracy for the screenshot comparison operations.
+
+For example, if you select 5%, your assertion will fail if the difference between the screenshots is more than 5%.
+
+If the screenshots have different sizes, the larger one will be automatically resized to match the smaller one.
+
+More details about this functionality are available in the <a class="endtest_link" href="/advanced/computer-vision/">Computer Vision</a> chapter.
+
+## 2. Screenshot Fuzz (%)
+
+This option is used to set the precision for the screenshot comparison operations.
+
+A smaller value will lead to a more precise screenshot comparison.
+
+A higher value will lead to a less precise screenshot comparison.
+
+An optimal value for the Screenshot Fuzz (%) is somewhere between 2% and 20%, but you can select values between 1% and 50%.
+
+More details about this functionality are available in the <a class="endtest_link" href="/advanced/computer-vision/">Computer Vision</a> chapter.
+
+## 3. Page Load Timeout (s)
+
+This defines the maximum amount of time that our engine will wait for a page to load.
+
+If the page does not load within that time, an error will be thrown.
+
+The setting also applies for AJAX requests sent by your application.
+
+## 4. Element Load Timeout (s)
+
+This defines the maximum amount of time that our engine will wait for an element to load.
+
+If the element does not load within that time, an error will be thrown.
+
+## 5. Automatic Timestamps
+
+If set to `On every error or failure`, a timestamp will be added to the logs each time an error or failure is encountered.
+
+If set to `On every step`, a timestamp will be added to the logs each time a step is executed.
+
+If set to `Disabled`, no timestamps will be taken automatically.
+
+## 6. Automatic Screenshots
+
+If set to `On every error or failure`, a screenshot will be taken each time an error or failure is encountered.
+
+If set to `On every step`, a screenshot will be taken each time a step is executed.
+
+If set to `Disabled`, no screenshots will be taken automatically.
+
+## 7. Error Handling
+
+The option allows you to choose if the test will automatically stop when it encounters the first error or if it will continue.
+
+## 8. Failed Assertion
+
+The option allows you to choose if the test will automatically stop when it encounters the first failed assertion or if it will continue.
+
+## 9. Machine Learning
+
+If enabled, our engine will store information about the elements and the flows from your application.
+
+By using the `Self-Healing` functionality, our engine can detect the changes and automatically update your tests.
+
+<Note> Enabling this option slows down your test execution. </Note>
+
+## 10. Self-Healing
+
+If enabled, our engine will automatically update your test if any non-breaking changes are detected.
+
+More details about this functionality are available in the <a class="endtest_link" href="/advanced/self-healing-tests">Self-Healing Tests</a> chapter.
+
+<Note> Enabling this option slows down your test execution. </Note>
+
+## 11. Video Recording
+
+If enabled, a video recording for the test execution will be available in the <a class="endtest_link" href="https://app.endtest.io/results">Results</a> section.
+
+## 12. Live Video
+
+If enabled, a live video feed of the test execution will be shown in the <a class="endtest_link" href="https://app.endtest.io/results">Results</a> section.
+
+<Note> Enabling this option slows down your test execution. </Note>
+
+## 13. Edit Mode
+
+This option relates to how you edit a step from a test.
+
+If set to `Clean`, the values in the inputs from that step will be deleted when you change the locator type.
+
+If set to `Smart`, the values in the inputs from that step will be kept when you change the locator type.
+
+## 14. Add Chrome Extension
+
+This option is available only for Web Tests.
+
+You can add a `Chrome Extension` that will be loaded in the `Chrome` browser once the test execution starts.
+
+Detailed instructions are provided in the <a class="endtest_link" href="/web-tests/how-to-test-chrome-extensions/">How to test Chrome Extensions</a> chapter.
+
+<Note> The Chrome Extension is loaded only if the test is executed in Chrome. </Note>
+
+## 15. Auto Grant Permissions
+
+This option is available only for Mobile Tests.
+
+If set to `True`, the permissions will be automatically granted to the mobile application.
+
+If set to `False`, the permissions will not be automatically granted to the mobile application.
+
+## 16. Alert Handling
+
+This option is available for Web Tests and Mobile Tests.
+
+If set to `Accept Alerts`, the alerts will be automatically accepted.
+
+If set to `Dismiss Alerts`, the alerts will be automatically dismissed.
+
+If set to `Ignore Alerts`, the alerts will be ignored and you can choose to add a `Close alert` step (for Web Tests) or a `Single Tap` (for Mobile Tests) step to accept or dismiss the alerts.
+
+> Using the `Ignore Alerts` option for Web Tests may cause your test execution to get stuck or encounter errors, since the presence of an alert can affect the functionality of the test.
+>
+> You will need to use the `Close alert` option from the `Miscellaneous` action in order to accept and close those alerts.
+
+## 17. Appium Version
+
+This option is available only for Mobile Tests.
+
+It allows you to select the Appium version for each test suite.
+
+## 18. Geolocation
+
+This option is available only for Web Tests.
+
+It allows you to select the Geolocation type: HTML5 Geolocation or Real IP Geolocation.
+
+You can also completely disable the Geolocation by selecting the None option.
+
+## 19. Drag and Drop
+
+This option is available only for Web Tests.
+
+It allows you to select the technology used to perform a Drag and Drop: JavaScript or WebDriver.
+
+## 20. Proxy IP
+
+This option is available only for Web Tests.
+
+It allows you to route the traffic from that test through the Proxy IP that you provide.
+
+The Proxy IP that you provide needs to allow traffic from our list of Secure Gateway IP addresses.
+
+## 21. No Reset
+
+This option is available only for Mobile Tests.
+
+If the option is set to Enabled, the app data will not be cleared if you close the app during a test execution.
+
+In all situations, regardless of the No Reset option, the app data will be cleared once the test execution or the recording is finished.
+
+## 22. Max Number of Errors
+
+If a test execution reaches this number, it will automatically stop.
+
+The default value is `10`.
+
+The idea behind this setting is that a large number of errors in a test execution might signal that something unexpected happened, such as the environment being down.
+
+Depending on the error type, the presence of each error might increase the duration of the test execution.
+
+For example, an `Element not found` error means that the test already waited for a number of seconds for that element to be present, the number of seconds in that case being the actual `Element Load Timeout` value.
+
+## 23. App Settings JSON
+
+This option is available only for Mobile Tests.
+
+The option enables you to update iOS app settings by using <a class="endtest_link" target="_blank" href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UserDefaults/Preferences/Preferences.html#//apple_ref/doc/uid/10000059i-CH6-SW5">iOS Settings bundle</a>.
+
+The mobile device grid provider must also support this capability.
+
+## 24. Show Step Names
+
+If enabled, the `Step Names` will be printed in the test execution logs.
+
+The number of the step will also be printed.
+
+<br />

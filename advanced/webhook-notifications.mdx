@@ -1,0 +1,54 @@
+---
+title: "Webhook Notifications"
+description: "How to configure Webhook Notifications for your tests"
+icon: 'webhook'
+'og:site_name': "Endtest"
+'og:title': "Webhook Notifications | Endtest"
+'og:description': "How to configure Webhook Notifications for your tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+Endtest can send you notifications regarding your test executions to a Webhook URL that you provide.
+
+The settings for Webhook Notifications must be configured for each test suite.
+
+## Steps
+
+1. Go to the `Settings` screen for your test suite.
+2. Click on the `Notifications` tab.
+3. Select one of the options from the `Webhook Notifications` dropdown:
+   * Do not send
+   * Send every time a test runs
+   * Send only when a test fails
+4. Add your `Webhook URL`.
+5. Click on the `Save` button.
+
+Endtest will send a POST request to your `Webhook URL` with the following parameters:
+
+| Parameter            | Description                                                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| name                 | The name of the test suite.                                                                                               |
+| hash                 | The unique hash for the test execution, the same one that it returned by the Endtest API call for running a test.         |                                               |
+| configuration        | The configuration of the machine or mobile device on which the test was executed.                                         |
+| passed               | The number of assertions that have passed.                                                                                |
+| failed               | The number of assertions that have failed.                                                                                |
+| errors               | The number of errors that have been encountered.                                                                          |
+| logs                 | The detailed logs for the test execution.                                                                                 |
+| video_url            | The URL for the video recording of the test execution.                                                                    |
+| variables            | All of the variables from the test execution, both system variables and the variables defined by the user.                |
+| test_case_management | The ID, Name, Status and External IDs for each Test Case.                                                                 |
+| source               | It will always have the value 'endtest'. You can use it in your script to identify the requests coming from our platform. |
+
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_webhook_notifications.mp4"
+></video>
+
+<br />

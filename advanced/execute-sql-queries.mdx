@@ -1,0 +1,78 @@
+---
+title: "Execute SQL Queries"
+description: "How to execute SQL queries in your tests"
+icon: 'database'
+'og:site_name': "Endtest"
+'og:title': "Execute SQL Queries | Endtest"
+'og:description': "How to execute SQL queries in your tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+You can easily connect to a database and execute SQL queries in your tests.
+
+The following databases are supported by our platform:
+* MySQL
+* PostgreSQL
+* Microsoft SQL
+* Oracle SQL
+
+To establish a new connection, select the `Connect to Database` option from the `Action` dropdown.
+
+If you want to execute a SQL query without fetching the result, use the `Execute SQL Query` action.
+
+If you want to get the result from a SQL query, use the `Extract result from SQL Query` option from the `Set Variable` action. This option allows you to fetch a value from a database and use it in your test.
+
+## Steps
+
+1. Add a `Connect to Database` step.<br />
+2. Add the query in an `Execute SQL Query` or `Extract result from SQL Query` step.
+
+Once the connection to the database is established with the `Connect to Database` step, you can continue to execute SQL queries until your test execution finishes.
+
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_execute_sql.mp4"
+></video>
+
+<br />
+
+If you want to execute SQL queries from your tests, make sure that your database can be accessed from our list of Secure Gateway IPs:
+
+| Secure Gateway IP Addresses |
+|-----------------------------|
+| 34.211.40.72                |
+| 35.166.159.89               |
+| 207.254.40.71               |
+| 207.254.60.102              |
+| 52.89.18.176                |
+| 52.26.12.35                 |
+| 54.187.169.42               |
+| 52.43.87.222                |
+| 34.214.85.4                 |
+| 54.184.162.15               |
+| 44.237.178.201              |
+| 44.238.105.245              |
+| 44.228.22.115               |
+| 35.81.185.74                |
+| 207.254.52.64               |
+| 44.241.213.227              |
+| 52.26.206.66                |
+| 52.13.40.64                 |
+| 44.238.190.158              |
+| 207.254.60.6                |
+| 207.254.41.137              |
+| 207.254.60.76               |
+| 34.213.62.124               |
+| 54.191.53.140               |
+| 18.237.140.182              |
+| 52.11.28.247                |
+| 44.240.94.219               |
+
+<Note> The traffic for the steps involving Databases does not go through the IP addresses used for Real IP Geolocation. </Note>

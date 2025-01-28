@@ -1,0 +1,52 @@
+---
+title: "Multiple environments"
+description: "Learn how to execute your tests on multiple environments"
+icon: 'code-branch'
+'og:site_name': "Endtest"
+'og:title': "Multiple environments | Endtest"
+'og:description': "Learn how to execute your tests on multiple environments"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+    
+## Introduction
+    
+You can use the same test suite for different environments (dev, staging, production, etc).
+    
+This can be achieved by using variables.
+    
+## Details
+    
+You can create a separate test case where you declare all or most of your variables.
+    
+<img height="200" src="https://app.endtest.io/images/endtest_set_variables_test_case.png" />
+    
+<br />
+    
+Ideally, this test case should be the first test case in your test suite:
+    
+<img height="200" src="https://app.endtest.io/images/endtest_var_test_cases.png" />
+    
+<br />
+    
+You can have separate test cases in which you declare the variables for each environment:
+    
+<img height="200" src="https://app.endtest.io/images/endtest_vars_different_envs.png" />
+    
+<br />
+    
+And when you execute the test suite, you can just select which test cases to execute:
+    
+<img height="200" src="https://app.endtest.io/images/endtest_select_test_cases.png" />
+    
+<br />
+    
+Declaring your variables in a single test case also comes in handy if you want to use those variables in different test suites, you just have to use the `Import Test Case` action to fetch them:
+    
+<img height="200" src="https://app.endtest.io/images/endtest_import_case.png" />
+    
+<br />
+    
+In that situation, changing the environment can be done simply by editing that `Import Test Case` step and choosing a different test case that declares a different set of variables.
+    
+<Note> More details about variables can be found in the <a class="endtest_link" href="/advanced/how-to-use-variables/">Variables</a> chapter. </Note>
+

@@ -1,0 +1,484 @@
+---
+title: Endtest API
+description: Learn how to use the Endtest API
+icon: 'webhook'
+'og:title': 'Endtest API | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'Learn how to use the Endtest API'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+## Introduction
+
+You can easily integrate Endtest into your workflow by using our API.
+
+These are the tasks you can perform with the Endtest API:
+1. Start a test execution.
+2. Start multiple test executions.
+3. Fetch the results for a test execution.
+4. Fetch the results for multiple test executions.
+5. Stop a test execution.
+6. Get the IDs and Names of all the test suites that you have access to.
+7. Get the IDs, Names and External IDs of all the test cases from a test suite.
+8. Upload a file in the [Drive Section](https://app.endtest.io/drive).
+9. Get the list of files uploaded in the [Drive](https://app.endtest.io/drive).
+10. Delete a file from the [Drive](https://app.endtest.io/drive).
+11. Get the number of available parallel slots.
+
+## 1. Start a test execution
+
+To get the API request for executing a test, just click on `Get API Request` from the Run Test Suite modal.
+
+The API request contains the `appId` and `appCode` which are used to identify your user and do not change.
+
+<video 
+autoPlay
+loop
+playsInline
+muted
+className="w-full aspect-video"
+src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_api.mp4">
+</video>
+
+<br/>
+
+This API request can only be called with an HTTP Method of type GET.
+
+### Endtest API Parameters for starting a Web Test execution
+
+| Endtest API Parameter   | Description                 |
+|-------------------------|-----------------------------|
+| action                  | The type of action (runWeb) |
+| appId                   | The App ID of the user      |
+| appCode                 | The App Code of the user    |
+| suite                   | The ID of the test suite    |
+| platform                | The platform to run the test on |
+| os                      | The operating system for the execution |
+| browser                 | The browser for the execution |
+| browserVersion          | The browser version for the execution (latest or beta) |
+| resolution              | The screen resolution for the execution |
+| geolocation             | The Geolocation for the execution |
+| cases                   | The test cases to be executed |
+| notes                   | Notes that will appear in the execution |
+
+### Endtest API Parameters for starting a Mobile Test execution
+
+| Parameter | Description                               |
+|-----------|-------------------------------------------|
+| action    | The type of action (runMobile)            |
+| appId     | The App ID of the user                    |
+| appCode   | The App Code of the user                  |
+| suite     | The ID of the test suite                  |
+| platform  | The platform to run the test on           |
+| device    | The mobile device to run the test on      |
+| app       | The download link for the APK or IPA file |
+| grid      | The mobile device grid provider           |
+| cases     | The test cases to be executed             |
+| notes     | Notes that will appear in the execution   |
+
+
+The response from this API request contains a `hash` which can be used to uniquely identify that test execution.
+
+### Declaring variables in the Endtest API request
+
+You can add variables directly in the Endtest API request.
+
+For example, adding `&username=Matt` will automatically create the variable `$username` with the value `Matt`.
+
+### Overwriting the settings for Webhook Notifications
+
+The Webhook URL and Webhook Notifications can be overwritten by adding `&webhookUrl=your_webhook_url` and `&webhookNotifications=option`, where option can be 0, 1 or 2.
+
+0 = Do not send<br />
+1 = Send every time a test runs<br />
+2 = Send only when a test fails<br />
+
+If your Webhook URL is `https://my-own-webhook.com` and you want to receive notifications every time a test is executed, you would need to add the following to your Endtest API call:<br />
+`&webhookUrl=https://my-own-webhook.com&webhookNotifications=1`
+
+### Partial match for the app parameter for Mobile Tests
+
+The 'app' parameter for starting Mobile Tests can be a partial match.
+
+For example, if we have this download link for an APK file:
+
+`https://endtest-files.s3.us-west-2.amazonaws.com/uzikStbflpt3PcQiM8z8ByYh1H/Master-Sample.apk`
+
+The app parameter can look like this:
+
+`&app="[*Master*.apk]"`
+
+>- Double quotes should be added at the beginning and end of that value.
+>- Square brackets should be added at the beginning and end, inside the double quotes.
+>- The asterisk is a wildcard, can be placed wherever you want to replace 0 or more characters.
+>- It will fetch the most recent uploaded file from the Endtest Drive that matches that pattern.
+>- The pattern is not case-sensitive.
+>- The `Visibility` property of the file from the Endtest Drive must be set to `MyEntireTeam`.
+
+<Note> **Legacy Endtest API requests** <br /> <br /> The Endtest API request for starting test executions was updated on October 12 2021. The legacy Endtest API requests are still supported. <br /> <br /> You can download the legacy Endtest API Mappings for starting a web test execution here: [Endtest_API_Mappings_for_Web_Tests.pdf](https://endtest-files.s3.us-west-2.amazonaws.com/6Z0PMGM06Y4iXYctL2KxExoB2KgGjP/Endtest_API_Mappings_for_Web_Tests.pdf) </Note>
+
+## 2. Start multiple test executions
+
+The only way to start multiple test executions with one single Endtest API request is by using <a class="endtest_link" href="/advanced/team/#labels">Labels</a>.
+
+In the Endtest API request, replace the `suite` parameter with the `label` parameter and provide the name of the label instead of the test suite ID.
+
+
+This API request can only be called with an HTTP Method of type GET.
+
+### Endtest API Parameters for starting multiple Web Test executions
+
+| Endtest API Parameter | Description                                 |
+|-----------------------|---------------------------------------------|
+| action                | The type of action (runWeb)                 |
+| appId                 | The App ID of the user                      |
+| appCode               | The App Code of the user                    |
+| label                 | The label assigned to the test suites       |
+| platform              | The platform to run the test on             |
+| os                    | The operating system for the execution      |
+| browser               | The browser for the execution               |
+| browserVersion        | The browser version for the execution (latest or beta) |
+| resolution            | The screen resolution for the execution     |
+| geolocation           | The Geolocation for the execution           |
+| cases                 | The test cases to be executed               |
+| notes                 | Notes that will appear in the execution     |
+
+### Endtest API Parameters for starting multiple Mobile Test executions
+
+| Parameter | Description                               |
+|-----------|-------------------------------------------|
+| action    | The type of action (runMobile)            |
+| appId     | The App ID of the user                    |
+| appCode   | The App Code of the user                  |
+| label     | The label assigned to the test suites     |
+| platform  | The platform to run the test on           |
+| device    | The mobile device to run the test on      |
+| app       | The download link for the APK or IPA file |
+| grid      | The mobile device grid provider           |
+| cases     | The test cases to be executed             |
+| notes     | Notes that will appear in the execution   |
+
+The request will respond with the unique hashes for each test execution, separated by commas.
+
+>The value from the `label` parameter is case-sensitive.
+>
+>Only one Label Name can be provided in the `label` parameter for each request.
+>
+>Only one configuration can be provided in each request.
+
+## 3. Fetch the results for a test execution
+
+To get the results from a test execution with our API, use a GET request with the following format:
+
+`https://app.endtest.io/api.php?action=getResults&appId=[your app id]&appCode=[your app code]&hash=[the returned hash]&format=[html or json or json-light]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values, which you can retrieve from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page by clicking on the `Show API Credentials` button.
+
+Replace `[the returned hash]` with the hash that was returned by the Endtest API request for starting a test execution.
+
+You have the option to choose a format, either `html` or `json` or `json-light`.
+
+This API request can only be called with an HTTP Method of type GET.
+
+| Endtest API Parameter | Description                                     |
+|-----------------------|-------------------------------------------------|
+| action                | The type of action (getResults)                |
+| appId                 | The App ID of the user                          |
+| appCode               | The App Code of the user                        |
+| hash                  | The unique hash for that test execution         |
+| format                | The format of the results (json, json-light or html) |
+
+If you're planning to integrate Endtest into your continuous delivery workflow, you're going to need to use both the API request for starting a test execution and the API request for fetching the results.
+
+Because it takes time for a functional test to finish, you either need to add a `sleep` in your script or a loop that calls the API request for fetching the results at a certain interval until the test execution is finished.
+
+Here is a sample Shell script that shows you how to do that:
+
+```
+#!/bin/bash
+hash=$(curl -X GET --header "Accept: */*" "${3}")
+for run in {1.."${4}"}
+do
+  sleep 30
+  result=$(curl -X GET --header "Accept: */*" "https://app.endtest.io/api.php?action=getResults&appId=${1}&appCode=${2}&hash=${hash}&format=json")
+  if [ "$result" == "Test is still running." ]
+  then
+    status=$result
+    # Don't print anything
+  elif [ "$result" == "Processing video recording." ]
+  then
+    status=$result
+    # Don't print anything
+  elif [ "$result" == "Stopping." ]
+  then
+    status=$result
+  elif [ "$result" == "Erred." ]
+  then
+    status=$result
+    echo $status
+  elif [ "$result" == "" ]
+  then
+    status=$result
+    # Don't print anything
+  else
+     echo "$result" | jq
+     exit 0
+  fi
+done
+exit
+```
+
+This sample script would require the following arguments:
+1. The `App ID` for your account.
+2. The `App Code` for your account.
+3. The API Request for starting the test execution.
+4. The number of times the API request for fetching the results will be sent once every 30 seconds.
+
+For example, if you know that your test execution usually takes 3 minutes, you should use the value 7.
+
+`7 x 30 seconds = 210 seconds > 3 minutes`
+
+Don't forget to make your Shell script executable by running the following command:
+
+```console
+sudo chmod +x test.sh
+```
+
+And you would also need to install the `jq` package:
+
+```sh
+sudo apt-get install jq
+```
+
+The command for running the sample Shell script would have the following format:
+
+```sh
+./test.sh app-id app-code api-request-to-start-test-execution number-of-loops
+```
+
+Let's pretend we have the following values:
+
+```
+App ID = 44233559
+
+App Code = 22381137
+
+Endtest API Request to start test execution = "https://app.endtest.io/api.php?action=runTestSuite&appId=44233559&appCode=22381137&testSuite=106877&selectedPlatform=windows&selectedOs=a&selectedBrowser=chrome&selectedResolution=d&selectedLocation=sanfrancisco&selectedCases=all&writtenAdditionalNotes="
+
+Number of loops = 10
+```
+
+The command for running the sample Shell script would look like this:
+
+```sh
+./test.sh 44233559 22381137 "https://app.endtest.io/api.php?action=runTestSuite&appId=44233559&appCode=22381137&testSuite=106877&selectedPlatform=windows&selectedOs=a&selectedBrowser=chrome&selectedResolution=d&selectedLocation=sanfrancisco&selectedCases=all&writtenAdditionalNotes=" 10
+```
+
+The sample script will output the Results in JSON format with the following keys:
+* `test_suite_name` (string) - The name of the test suite.
+* `configuration` (string) - The configuration of the machine or mobile device on which the test was executed.
+* `test_cases` (int32) - The number of test cases.
+* `passed` (int32) - The number of assertions that have passed.
+* `failed` (int32) - The number of assertions that have failed.
+* `errors` (int32) - The number of errors that have been encountered.
+* `start_time` (int32) - The timestamp for the start of the test execution.
+* `end_time` (int32) - The timestamp for the end of the test execution.
+* `detailed_logs` (int32) - The detailed logs for the test execution.
+* `screenshots_and_video` (int32) - The URL for the screenshots and the video recording of the test execution.
+* `test_case_management` (int32) - The ID, Name, Status and External IDs for each Test Case.
+
+<Note> Using the `json-light` format instead of `json` means that the Results in JSON format won't include the `detailed_logs` and `screenshots_and_video` items. </Note>
+
+
+
+You can also use the value of the `hash` variable to generate the link to the Results page for that test execution:
+
+```sh
+results=https://app.endtest.io/results?hash="$hash"
+```
+
+
+>An alternative way to retrieve the results from a test execution is to add your Webhook URL in the [Webhook Notifications](/advanced/webhook-notifications) settings or in the Endtest API request for starting a test execution.
+>
+>After the test execution is finished, the results will be automatically sent to that Webhook URL.
+
+## 4. Fetch the results for multiple test executions
+
+The exact same Endtest API request can be used, the only difference is that you can provide multiple unique hashes, separated by commas.
+
+This API request can only be called with an HTTP Method of type GET.
+
+| Endtest API Parameter   | Description                 |
+|-------------|-----------------------------------------|
+| action      | The type of action (getResults)        |
+| appId       | The App ID of the user                  |
+| appCode     | The App Code of the user                |
+| hash     | List of unique hashes, separated by commas    |
+| format    | The format of the results (json or html)        |
+
+>You can also fetch all the test executions by using the `getAllResults` action, which requires the following parameters: `appId`, `appCode`, `format`.
+
+
+## 5. Stop a test execution
+
+To stop a test execution with the Endtest API, use the following command:
+
+`https://app.endtest.io/api.php?action=stopTest&appId=[your app id]&appCode=[your app code]&hash=[the returned hash]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values, which you can retrieve from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page by clicking on the `Show API Credentials` button.
+
+Replace `[the returned hash]` with the hash that was returned by the Endtest API request for starting a test execution.
+
+This API request can only be called with an HTTP Method of type GET.
+
+>You can also stop a test execution directly from the UI, by clicking on the `Stop Test` button from the Results page.
+>
+>You can also use the `Stop Test` option from the `Miscellaneous` action in your test. The test will automatically stop when it reaches that step.
+>
+>More details are available in the <a class="endtest_link" href="/advanced/how-to-stop-a-test/">How to stop a test</a> chapter.
+
+
+
+## 6. Get the IDs and Names of all the test suites that you have access to
+
+To get the ids and names of all the test suites, use the following command:
+
+`https://app.endtest.io/api.php?action=getTestSuites&appId=[your app id]&appCode=[your app code]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+This API request can only be called with an HTTP Method of type GET.
+
+## 7. Get the IDs, Names and External IDs of all the test cases from a test suite
+
+To get the ids, names and external IDs of all the test cases from a test suite, use the following command:
+
+`https://app.endtest.io/api.php?action=getTestCases&appId=[your app id]&appCode=[your app code]&testSuite=[id of the test suite]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+Replace `[id of the test suite]` with the ID of your test suite.
+
+You can get those values by clicking on `Get API Request` from the Run Test Suite modal.
+
+This API request can only be called with an HTTP Method of type GET.
+
+
+## 8. Upload a file in the Drive
+
+To upload a file in the <a class="endtest_link" href="https://app.endtest.io/drive">Drive</a>, use the following cURL command:
+
+
+`curl -X POST "https://app.endtest.io/api.php" -F "file=@/path/to/file"  -F "appId=[your app id]" -F "appCode=[your app id]" -F "visibility=[your visibility preference]"`
+
+Replace `/path/to/file` with the local path of your file.
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values, which you can retrieve from the <a class="endtest_link" href="https://app.endtest.io/settings">Settings</a> page by clicking on the `Show API Credentials` button.
+
+Replace `[your visibility preference]` with `OnlyMe` or `MyEntireTeam`.
+
+This API request can only be called with an HTTP Method of type POST.
+
+The response from this API request contains the `File Download URL` for the uploaded file.
+
+### Endtest API Parameters for uploading a file
+
+| Endtest API Parameter   | Description                 |
+|-------------|-----------------------------------------|
+| file      | The local path of the file        |
+| appId       | The App ID of the user                  |
+| appCode     | The App Code of the user                |
+| visibility     | Visibility preference (OnlyMe or MyEntireTeam)    |
+| replace    | Optional parameter. Can be used to replace existing file (True or False)  |
+
+Sample cURL command:
+
+`curl -X POST "https://app.endtest.io/api.php" -F "file=@/Users/matt/Desktop/calculator.ipa"  -F "appId=20112504" -F "appCode=42554172" -F "visibility=OnlyMe"`
+
+Sample cURL response:
+
+`https://endtest-files.s3.us-west-2.amazonaws.com/dEREnfuqPYQRaYFWdyY7zwa0BL97lu/calculator.ipa`
+
+
+
+<video 
+autoplay
+muted
+src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_api_upload_file.mp4">
+</video>
+
+<br/>
+
+>Only the user who uploaded the file can replace it by using the `replace` parameter.
+
+
+## 9. Get the list of files uploaded in the Drive
+
+To get the list of files from the <a class="endtest_link" href="https://app.endtest.io/drive">Drive</a>, use the following command:
+
+`https://app.endtest.io/api.php?action=getFilesFromDrive&appId=[your app id]&appCode=[your app code]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+This API request can only be called with an HTTP Method of type GET.
+
+It will return a JSON which contains the names, the URLs and the access rules for each file.
+
+
+## 10. Delete a file from the Drive
+
+To delete a file from the <a class="endtest_link" href="https://app.endtest.io/drive">Drive</a>, use the following command:
+
+`https://app.endtest.io/api.php?action=deleteFile&appId=[your app id]&appCode=[your app code]&url=[file URL]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+Replace `[file url]` with the URL of the file from the Endtest Drive.
+
+This API request can only be called with an HTTP Method of type GET.
+
+>Only the user who uploaded the file can delete it with the Endtest API.
+
+## 11. Get the number of available parallel slots
+
+For certain complex orchestration workflows, you might need to get the number of parallel test execution slots that are currently available for your Team.
+
+>Available Parallel Slots = Total Parallel Slots - Occupied Parallel Slots
+
+To get that value, use the following command:
+
+`https://app.endtest.io/api.php?action=getNumberOfAvailableParallelSlots&appId=[your app id]&appCode=[your app code]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+This API request can only be called with an HTTP Method of type GET.
+
+## 12. Import test suite from JSON file
+
+<Note> This request is not available during the free trial. </Note>
+
+If you exported a test suite from Endtest as a JSON file, you can import it back.
+
+This API request can only be called with an HTTP Method of type GET.
+
+Use the following command:
+
+`https://app.endtest.io/api.php?action=importSuiteFromJSON&appId=[your app id]&appCode=[your app code]&json=[link to json file]&type=[test suite type]&suiteName=[test suite name]`
+
+Replace `[your app id]` and `[your app code]` with your `appId` and `appCode` values.
+
+Replace `[link to json file]` with the link to the JSON file (which can also be stored in the <a class="endtest_link" href="https://app.endtest.io/drive">Drive</a>).
+
+Replace `[test suite type]` with the type of test suite you are importing (`web` or `mobile`).
+
+Replace `[test suite name]` with the name of the new test suite.
+
+This API request can only be called with an HTTP Method of type GET.
+
+The response from this API request contains the ID of the created test suite.
+
+>Importing a test suite from a JSON file does not restore the original Settings, Collaborators, Labels, etc. It only restores the cases and the steps.
+>
+>The purpose of this request is only to restore a previously exported test suite.
+>
+>It should not be used to share a test suite with your team, since it's easier to do that by using the [Collaborators](/advanced/adding-collaborators) feature.
+>

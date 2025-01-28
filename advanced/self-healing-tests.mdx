@@ -1,0 +1,38 @@
+---
+title: "Self-Healing Tests"
+description: "Learn how to use Self-Healing Tests"
+icon: 'bandage'
+iconType: 'light'
+'og:site_name': "Endtest"
+'og:title': "Self-Healing Tests | Endtest"
+'og:description': "Learn how to use Self-Healing Tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+
+## Introduction
+
+Endtest is using Machine Learning to help you with the maintenance of your tests.
+
+By enabling the Machine Learning option, our platform will learn more about the elements and the flows from your application.
+
+It will store up to 100 different locators for each element.
+
+If a developer makes changes to your application, your tests will no longer be in sync with your application.
+
+By using the Self-Healing functionality, our engine will detect the changes and use the spare locators.
+
+That means you won't have to worry about constantly maintaining your tests.
+
+
+## Steps
+1. Go to the `Settings` screen for your test suite.
+2. Enable the `Machine Learning` option from the `Advanced` tab.
+3. Execute your test at least once, so our engine can store information about your elements.
+4. Enable the `Self-Healing` option from the `Advanced` tab.
+5. When you run the test, our engine can automatically use the spare locators if needed.
+
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_self_healing_example.mp4"
+></video>

@@ -1,0 +1,38 @@
+---
+title: "PagerDuty Notifications"
+description: "How to configure PagerDuty Notifications for your tests"
+icon: 'pager'
+'og:site_name': "Endtest"
+'og:title': "PagerDuty Notifications | Endtest"
+'og:description': "How to configure PagerDuty Notifications for your tests"
+'og:image': "https://app.endtest.io/images/endtest_black_logo_og.png"
+---
+    
+## Introduction
+    
+Endtest can send you PagerDuty notifications (also known as Alerts) when you have an error or a failed assertion in a test execution.
+    
+The settings can be configured for each test suite.
+    
+    
+## Steps
+1. Go to the `Settings` screen for your test suite.
+2. Click on the `Notifications` tab.
+3. Select one of the options from the `PagerDuty Alerts` dropdown:
+   * Do not send
+   * Send only when a test fails
+4. Select the PagerDuty service.
+5. Click on the `Save` button.
+    
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video"
+  src="https://endtest-videos.s3-us-west-2.amazonaws.com/documentation/endtest_pagerduty_notifications.mp4"
+></video>
+    
+<br />
+    
+<Note> Make sure to integrate Endtest with your PagerDuty services by following the instructions from the <a class="endtest_link" href="/integrations/pagerduty">PagerDuty</a> chapter. <br /> <br /> If you are not getting the alerts on PagerDuty, you should check if you're on the same Endtest Team with the user who made the connection to the PagerDuty service.  </Note>

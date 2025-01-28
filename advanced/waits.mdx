@@ -1,0 +1,91 @@
+---
+title: Waits
+description: How to use Waits in your tests
+icon: 'hourglass'
+'og:title': 'Waits | Endtest'
+'og:site_name': 'Endtest'
+'og:description': 'How to use Waits in your tests'
+'og:image': 'https://app.endtest.io/images/endtest_black_logo_og.png'
+---
+
+## Introduction
+
+In a test, Wait commands direct test execution to pause for a certain length of time before moving onto the next step.
+
+Endtest provides Smart Waits, and that means that you don't have to add a Wait before each interaction with an element.
+
+But you also have the option of adding `Wait Until` and `Pause` steps, since certain situations might require these actions.
+
+
+## 1. Smart Waits
+
+There are 2 categories of Smart Waits:
+
+1. Smart Waits for pages.
+2. Smart Waits for elements.
+
+### 1. Smart Waits for pages
+
+When a page is accessed in a test, Endtest will automatically wait for that page to load, before attempting to execute other steps.
+
+You can configure the `Page Load Timeout` in the `Advanced` section of the `Settings` for each test suite.
+
+The `Page Load Timeout` is the maximum amount of time that the engine will wait for the page to load, before showing an error message.
+
+### 2. Smart Waits for elements
+
+Endtest will automatically wait for an element to be present, before attempting to interact with it.
+
+The engine will look for that element 10 times every second, until it finds the element.
+
+If it finds the element, it performs the action and then it immediately moves to the next step.
+
+You can configure the `Element Load Timeout` in the `Advanced` section of the `Settings` for each test suite.
+
+The `Element Load Timeout` is the maximum amount of time that the engine will wait for an element to be present, before showing an `Element not found` error message.
+
+<img src="https://app.endtest.io/images/timeout_settings.jpg" alt="endtest timeout wait" height="120"/>
+
+If you are running a test on an environment which is a bit slow, we recommend increasing the values for the `Element Load Timeout` and `Page Load Timeout` settings.
+
+## 2. Wait Until
+
+The `Wait Until` method can be found in the `Miscellaneous` action.
+
+It's useful in situations where your test needs to wait for a certain condition.
+
+<img src="https://app.endtest.io/images/wait_until_doc.jpg" alt="endtest wait until settings" height="360"/>
+
+A relevant example is when your test needs to wait for an email to be delivered to the [Endtest Mailbox](/web-tests/how-to-test-emails).
+
+There is no exact way to know how long it would take the system from your side to send the email.
+
+A good approach is to wait to for the Email Subject element to be present.
+
+And you can also refresh the page at a certain interval while waiting, which is useful for pages that do not auto-refresh their contents.
+
+Adding a value in the `Maximum time to wait (s)` is mandatory, since you don't want that step to wait for a long time in case the email never gets sent from your side.
+
+<img src="https://app.endtest.io/images/wait_for_email_doc.jpg" alt="endtest wait for email mailbox" height="550"/>
+
+Another relevant example is when you need to wait for an element to be clickable.
+
+Our engine will automatically wait for an element to be present, but not necessarily clickable.
+
+There are scenarios where an element might appear on the page, and not be clickable yet.
+
+Details about that are provided in the [Element not clickable](/web-tests/finding-elements-in-web-applications#2-element-not-clickable) section.
+
+
+
+## 3. Pause
+
+There is also the option to add a `Pause` step.
+
+During that pause, the entire test execution will wait.
+
+<img src="https://app.endtest.io/images/pause_doc.jpg" alt="endtest pause wait" height="120"/>
+
+It's not considered a good practice to use `Pause` steps.
+
+The recommended approach is to configure the `Element Load Timeout` and `Page Load Timeout` settings accordingly or to use `Wait Until` steps.
